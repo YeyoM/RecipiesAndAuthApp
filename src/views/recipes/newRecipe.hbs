@@ -1,0 +1,34 @@
+<form action="/recipes/new-recipe" method="POST">
+    <legend>Add a new Recipe</legend>
+    <p>Note: <small>The ingredients's amounts are represented <em> in mg out of 100g</em>.</small></p>
+    {{#if ingredients}}
+    <div class="form-group">
+      <label for="exampleInputEmail1" class="form-label mt-4">Recipe Title</label>
+      <input type="text" name="title" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter name">
+    </div>
+    {{#each ingredients}}
+    <div class="form-group mt-4">
+      <h6>{{title}}</h6>
+      <ul>
+        <li>Type: {{tipo}}</li>
+        <p class="mb-0"><em>Nutritional Values</em></p>
+        <li>Calories: {{calorias}}</li>
+        <li>Carbohydrates: {{hdecarbono}}</li>
+        <li>Fat: {{grasa}}</li>
+        <li>Protein: {{proteina}}</li>
+        <label class="col-form-label col-form-label-sm mt-2" for="inputSmall">Amount for the recipe</label>
+        <input class="form-control form-control-sm" name="ingredientsAmounts" type="number" placeholder="amount in gr" id="inputSmall" step="any" min="0" >
+        <input type="hidden" name="ingredientsId" value={{_id}}>
+      </ul>
+    </div>
+    {{/each}}
+    <div class="form-group">
+      <button type="submit" class="btn btn-primary mt-3">Submit</button>
+    </div>
+    {{else}}
+        <h4>Oops!</h4>
+    <p class="lead">
+      We have not found any ingredients, add a couple <a href="/ingredients/add">here</a> before start adding recipes!
+    </p>
+    {{/if}}
+</form>

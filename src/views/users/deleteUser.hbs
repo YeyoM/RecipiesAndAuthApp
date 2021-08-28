@@ -1,0 +1,17 @@
+<div class="form-group mt-4">
+  <form action="/users/deleteUser/{{user._id}}?_method=DELETE" method="POST">
+    <legend>Delete Account</legend>
+        <div class="form-group">
+            <p>Be careful when deleting a user, because from now on, the account will no longer be available, and all the data in the account will deleted permanently from our databases. This action can't be undone. To delete your user, please enter your email and password so we know it is you.</p>
+            <div class="form-floating mb-3">
+                <input type="email" class="form-control" id="floatingInput" placeholder="name@example.com" name="email">
+                <label for="floatingInput">Email address</label>
+            </div>
+            <div class="form-floating mb-4">
+                <input type="password" class="form-control" id="floatingPassword" placeholder="Password" name="password">
+                <label for="floatingPassword">Password</label>
+            </div>
+            <button class="btn btn-outline-danger mt-0">Delete my Account</button>
+        </div>
+    </form>  
+</div>

@@ -1,0 +1,41 @@
+<ul class="nav nav-pills">
+  <li class="nav-item">
+    <a class="nav-link active" href="/">AuthApp</a>
+  </li>
+  {{#if user}}
+  <li class="nav-item dropdown">
+    <a class="nav-link dropdown-toggle dropbtn" data-bs-toggle="dropdown" href="/ingredients" role="button" aria-haspopup="true" aria-expanded="false">Ingredients</a>
+    <div class="dropdown-content">
+      <a class="dropdown-item" href="/ingredients">All ingredients</a>
+      <a class="dropdown-item" href="/ingredients/add">Add a Ingredient</a>
+      <div class="dropdown-divider"></div>
+    </div>
+  </li>
+  <li class="nav-item dropdown">
+    <a class="nav-link dropdown-toggle dropbtn" data-bs-toggle="dropdown" href="/recipes" role="button" aria-haspopup="true" aria-expanded="false">Recipes</a>
+    <div class="dropdown-content">
+      <a class="dropdown-item" href="/recipes">All Recipes</a>
+      <a class="dropdown-item" href="/recipes/add">Add a Recipe</a>
+      <div class="dropdown-divider"></div>
+    </div>
+  </li>
+  <li class="nav-item dropdown">
+    <a class="nav-link dropdown-toggle dropbtn" data-bs-toggle="dropdown" href="#" role="button" aria-haspop="true" aria-expanded="false">My account</a>
+    <div class="dropdown-content">
+      <a class="dropdown-item" href="/users/updateName">Edit your account</a>
+      <a class="dropdown-item" href="/users/manageSubscription">Manage my Subscription</a>
+      <a class="dropdown-item" href="/users/changePasswordLanding">Change your password</a>
+      <a class="dropdown-item" href="/users/deleteUser">Delete my account</a>
+      <a class="dropdown-item" href="/users/logout">Log Out</a>
+    </div>
+  </li>
+  {{else}}
+  <li class="nav-item ml-auto">
+    <a class="nav-link" href="/users/signin">Login</a>
+  </li>
+  <li class="nav-item">
+    <a class="nav-link" href="/users/signup">Register</a>
+  </li>
+  {{/if}}
+</ul>
+    

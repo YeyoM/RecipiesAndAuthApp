@@ -1,0 +1,31 @@
+<form action="/ingredients/new-ingredient" method="POST">
+    <legend>Add a new ingredient</legend>
+    <p>Note: <small>The amounts must be represented <em> in gr out of 100g</em>.</small></p>
+    <div class="form-group">
+      <label for="exampleInputEmail1" class="form-label mt-4">Ingredient Name</label>
+      <input type="text" name="title" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter name">
+    </div>
+    <div class="form-group">
+      <label for="exampleTextarea" class="form-label mt-4">Ingredient Type</label>
+      <input type="text" name="tipo" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter type">
+    </div>
+    <div class="form-group">
+      <label for="exampleInputEmail1" class="form-label mt-4">Calories</label>
+      <input type="number" name="calorias" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter calories" step="any" min="0">
+    </div>
+    <div class="form-group">
+      <label for="exampleInputEmail1" class="form-label mt-4">Carbohydrates</label>
+      <input type="number" name="hdecarbono" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter carbohydrates" step="any" min="0">
+    </div>
+    <div class="form-group">
+      <label for="exampleInputEmail1" class="form-label mt-4">Fat</label>
+      <input type="number" name="grasa" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter fat" step="any" min="0">
+    </div>
+    <div class="form-group">
+      <label for="exampleInputEmail1" class="form-label mt-4">Protein</label>
+      <input type="number" name="proteina" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter Protein" step="any" min="0">
+    </div>
+    <div class="form-group">
+        <button type="submit" class="btn btn-primary mt-3">Submit</button>
+    </div>
+</form>

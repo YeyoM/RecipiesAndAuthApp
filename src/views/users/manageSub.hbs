@@ -1,0 +1,16 @@
+<form action="/users/cancelSubscription/{{user._id}}?_method=DELETE" method="POST">
+    <h2>Manage my subscription</h2>
+    <p class="lead">Hi {{user.name}}, here you can manage your subscription, check when is billed or even cancel it</p>
+    <p>Your actual subscription is ${{userSubscription.amount}}</p>
+    <p>Your subscription is billed the day {{userSubscription.day}} of every month.</p>
+    <legend>Cancel Subscription</legend>
+    <div class="form-floating mb-3">
+        <input type="email" class="form-control" id="floatingInput" placeholder="name@example.com" name="email">
+        <label for="floatingInput">Email address</label>
+    </div>
+    <div class="form-floating mb-4">
+        <input type="password" class="form-control" id="floatingPassword" placeholder="Password" name="password">
+        <label for="floatingPassword">Password</label>
+    </div>
+    <button class="btn ">Cancel my Subscription</button>
+</form>

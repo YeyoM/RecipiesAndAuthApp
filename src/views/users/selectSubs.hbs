@@ -1,0 +1,21 @@
+<body>
+    <div class="sr-root mb-0">
+      <div >
+        <h1 class="mb-4">Choose a collaboration plan</h1>
+
+        <div class="price-table-container">
+          <section>
+            <form action="/create-checkout-session/{{id}}" method="POST">
+              <input type="hidden" id="basicPrice" name="priceId" value="1000" />
+              <div class="name">Starter</div>
+              <div class="price">$12</div>
+              <div class="duration">per month</div>
+              <button id="basic-plan-btn">Select</button>
+            </form>
+          </section>
+
+        </div>
+      </div>
+    </div>
+    <div id="error-message" class="error-message"></div>
+  </body>

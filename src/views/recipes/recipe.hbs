@@ -1,0 +1,25 @@
+<div class="card all-page">
+    <div class="card-header">Recipe: {{recipe.title}}</div>
+    <div class="card-body">
+        <h6>Ingredients: </h6>
+        {{#each ingredients}}
+        <p>{{title}}</p>
+        <ul>
+            <li>Type: {{tipo}}</li>
+            <p class="mb-0"><em>Nutritional Values </em><small>(per 100gr)</small></p>
+            <li>Calories: {{calorias}}cals</li>
+            <li>Carbohydrates: {{hdecarbono}}gr</li>
+            <li>Fat: {{grasa}}gr</li>
+            <li>Protein: {{proteina}}gr</li>
+            <li><p class="text-primary">Amount: {{amount}}gr</p></li>
+        </ul>
+        {{/each}}
+        <h5>Total Nutritional Value</h5>
+        <ul>
+            <li>Calories: {{totals.calorias}}cals</li>
+            <li>Carbohydrates: {{totals.hdecarbono}}gr</li>
+            <li>Fat: {{totals.grasa}}gr</li>
+            <li>Protein: {{totals.proteina}}gr</li>
+        </ul>
+    </div>
+</div>

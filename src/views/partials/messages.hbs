@@ -1,0 +1,13 @@
+{{#if success_msg}}
+    <div class="alert alert-dismissible alert-success">
+        <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+        {{success_msg}}
+    </div>
+{{/if}}
+
+{{#if error_msg}}
+    <div class="alert alert-dismissible alert-danger">
+        <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+        {{error_msg}}
+    </div>
+{{/if}}

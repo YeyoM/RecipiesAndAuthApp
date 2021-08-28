@@ -1,0 +1,34 @@
+<div>
+  <h1>All my Recipes</h1>
+  <p>Note: <small>To view the content of each Recipe tap on the recipe's name</small></p>
+  <div>
+    {{#each recipes}}
+    <div class="card bg-secondary mb-3 " style="max-width: 18rem;">
+      <div class="card-header">Recipe</div>
+      <div class="card-body">
+        <h4 class="card-title">
+          <a href="/recipe/{{_id}}">{{title}}</a>
+        </h4>
+        <a href="/recipes/edit/{{_id}}">
+          <button type="button" class="btn btn-outline-primary">
+            Update
+          </button>
+        </a>
+        <form action="/recipes/delete/{{_id}}?_method=DELETE" method="POST">
+          <input type="hidden" name="_method" value="DELETE">
+          <button type="submit" class="btn btn-outline-danger">
+            Delete
+          </button>
+        </form>
+      </div>
+    </div>
+    {{else}}
+    <div class="mb-5">
+      <h4>Oops!</h4>
+      <p class="lead">
+        We have not found any recipes, start adding them <a href="/recipes/add">here</a>.
+      </p>
+    </div>
+    {{/each }}
+  </div>
+</div>

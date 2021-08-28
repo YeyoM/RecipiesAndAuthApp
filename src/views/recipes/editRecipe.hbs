@@ -1,0 +1,13 @@
+<form action="/ingredients/edit/{{recipe._id}}?_method=PUT" method="POST">
+    <input type="hidden" name="_method" value="PUT">
+    <legend>Edit Recipe</legend>
+    <p>Note: <small>The amounts must be represented <em> in mg out of 100g</em>.</small></p>
+    <div class="form-group">
+      <label for="exampleInputEmail1" class="form-label mt-4">Ingredient Name</label>
+      <input type="text" name="title" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter name" value={{ingredient.title}} >
+    </div>
+    <div class="form-group">
+      <label for="exampleTextarea" class="form-label mt-4">Ingredient Type</label>
+      <input type="text" name="tipo" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter type" value={{ingredient.tipo}} >
+    </div>
+</form>

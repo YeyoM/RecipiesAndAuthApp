@@ -1,0 +1,30 @@
+<div>
+  <h1>All my ingredients</h1>
+  <p>Note: <small>To view the content of each ingredient tap on the ingredient's name</small></p>
+  {{#each ingredients}}
+  <div class="card bg-secondary mb-3" style="max-width: 18rem;">
+    <div class="card-header">Ingredient</div>
+    <div class="card-body">
+      <h4 class="card-title">
+        <a href="/ingredient/{{_id}}">{{title}}</a>
+      </h4>
+      <a href="/ingredients/edit/{{_id}}">
+        <button type="button" class="btn btn-outline-primary">
+          Update
+        </button>
+      </a>
+      <form action="/ingredients/delete/{{_id}}?_method=DELETE" method="POST">
+        <input type="hidden" name="_method" value="DELETE">
+        <button type="submit" class="btn btn-outline-danger">
+          Delete
+        </button>
+      </form>
+    </div>
+  </div>
+  {{else}}
+  <h4>Oops!</h4>
+  <p class="lead">
+    We have not found any ingredients, start adding them <a href="/ingredients/add">here</a>.
+  </p>
+  {{/each }}
+</div>
