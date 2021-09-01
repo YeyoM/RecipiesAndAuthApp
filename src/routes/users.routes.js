@@ -12,6 +12,7 @@ const {
     updateUser,
     updateName,
     manageSubscriptionForm,
+    postCustomerPortal,
     cancelSubscription,
     deleteUserForm,
     deleteUser,
@@ -63,6 +64,7 @@ router.delete('/users/deleteUser/:id', isAuthenticated, deleteUser);
 
 //Manage Subscription
 router.get('/users/manageSubscription', isAuthenticated, manageSubscriptionForm);
+router.post('/users/customerPortal', isAuthenticated, postCustomerPortal);
 router.delete('/users/cancelSubscription/:id', isAuthenticated, cancelSubscription);
 //si no jala es delete aqui arriba, igual con delete user
 
@@ -75,7 +77,6 @@ router.put('/users/changePassword/:id', isAuthenticated, updatePassword);
 //Payment
 router.get('/users/select-subscription/:id', renderSubs);
 router.post('/create-checkout-session/:id', createCheckoutSession);
-router.post('/customer-portal', costumerPortalPost);
 router.post("/webhook", webhookPost);
 router.get("/checkout-session", webhookGet);
 router.get("/config", config);

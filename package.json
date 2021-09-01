@@ -7,7 +7,7 @@
     "webhook": "cd stripe_1.7.0_windows_i386 && stripe listen --forward-to localhost:4000/webhook",
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "nodemon src/index.js",
-    "dev": " concurrently -n 'app,webhook' -c 'green,blue' \"npm run start\" \"npm run webhook\""
+    "dev": " concurrently -n 'application,webhook' -c 'green,blue' \"npm run start\" \"npm run webhook\""
   },
   "keywords": [],
   "author": "",

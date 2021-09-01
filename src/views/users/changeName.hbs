@@ -1,21 +1,32 @@
-<form action="/users/updateName/{{user._id}}?_method=PUT" method="POST">
-    <legend>Change Name</legend>
+<div class="form-group">
+    <div class="form-group mb-4">
+        <form action="/users/updateName/{{user._id}}?_method=PUT" method="POST">
+            <legend>Change Name</legend>
+            <div class="form-group">
+                <div class="form-group">
+                    <fieldset disabled="">
+                        <label class="form-label" for="disabledInput">Your current name</label>
+                        <input class="form-control" id="disabledInput" type="text" placeholder={{user.name}}
+                            disabled="">
+                    </fieldset>
+                </div>
+                <div class="form-group">
+                    <label for="exampleInputEmail1" class="form-label mt-4">New name</label>
+                    <input type="text" name="name" class="form-control" id="exampleInputEmail1"
+                        aria-describedby="emailHelp" placeholder="Enter name">
+                </div>
+                <div class="d-grid gap-1">
+                    <button class="btn btn-lg btn-primary mt-4">Change Name</button>
+                </div>
+            </div>
+        </form>
+    </div>
     <div class="form-group">
-        <div class="form-group">
-            <fieldset disabled="">
-                <label class="form-label" for="disabledInput">Your current name</label>
-                <input class="form-control" id="disabledInput" type="text" placeholder={{user.name}}
-                    disabled="">
-            </fieldset>
-        </div>
-        <div class="form-group">
-            <label for="exampleInputEmail1" class="form-label mt-4">New name</label>
-            <input type="text" name="name" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp"
-                placeholder="Enter name">
-        </div>
-        <div class="d-grid gap-1">
-            <button class="btn btn-lg btn-primary mt-4">Change Name</button>
-        </div>
-    </div> 
-</form>
-
+        <p class="lead">Here you will be able to manage all your subscription billing information, and a bunch of other
+            options</p>
+        <p class="small">Note. You will be redirected to billing.stripe.com</p>
+        <form action="/users/customerPortal" method="POST">
+            <button class="btn btn-lg btn-primary">Manage</button>
+        </form>
+    </div>
+</div>

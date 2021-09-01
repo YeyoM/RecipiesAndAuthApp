@@ -202,6 +202,23 @@ usersCtrl.manageSubscriptionForm = async (req, res) => {
     console.log(userSubscription);
     res.render('users/manageSub', { user, userSubscription });
 }
+usersCtrl.postCustomerPortal = async (req, res) => {
+    const returnUrl = process.env.DOMAIN;
+    const user = await User.findById(req.user.id).lean();
+    const customer = user.stripeId
+
+    const portalSession = await stripe.billingPortal.sessions.create({
+        customer: customer,
+        return_url: returnUrl,
+    });
+
+    res.redirect(303, portalSession.url);
+
+    ////////////////////////////////////////////////////////////////
+    ////////////////////////////////////////////////////////////////
+    ////////////////////////////////////////////////////////////////
+    // customer portal, solo falta un boton con un form con peticion post a esta func
+};
 
 //Change user´s password
 usersCtrl.changePasswordForm = async (req, res) => {
@@ -265,7 +282,6 @@ usersCtrl.createCheckoutSession = async (req, res) => {
     const price = process.env.BASIC_PRICE_ID;
     const id = req.originalUrl.slice(25);
     const user = await User.findById(id).lean();
-    const email = user.email
     const customerId = user.stripeId
     
 
@@ -296,24 +312,6 @@ usersCtrl.createCheckoutSession = async (req, res) => {
         });
     }
 };
-usersCtrl.costumerPortalPost = async (req, res) => {
-    // For demonstration purposes, we're using the Checkout session to retrieve the customer ID.
-    // Typically this is stored alongside the authenticated user in your database.
-    console.log(req.body)
-    const { sessionId } = req.body;
-    const checkoutSession = await stripe.checkout.sessions.retrieve(sessionId);
-
-    // This is the url to which the customer will be redirected when they are done
-    // managing their billing with the portal.
-    const returnUrl = process.env.DOMAIN;
-
-    const portalSession = await stripe.billingPortal.sessions.create({
-        customer: checkoutSession.customer,
-        return_url: returnUrl,
-    });
-
-    res.redirect(303, portalSession.url);
-};
 usersCtrl.webhookPost = async (req, res) => {
     let data;
     let eventType;
@@ -336,12 +334,14 @@ usersCtrl.webhookPost = async (req, res) => {
         // Extract the object from the event.
         data = event.data;
         eventType = event.type;
+        console.log(event)
 
-        if (eventType === 
-            "payment_intent.succeeded") {
-            console.log(event)
+        if (eventType === "invoice.paid") {
+            console.log('hola')
             const customerId = event.data.object.customer;
             const subscriptionId = event.data.object.subscription;
+            console.log(event)
+            console.log(customerId, event.data.object.subscription);
             const customer = await stripe.customers.retrieve(customerId);
             const email = customer.email;
             const user = await User.findOne({ email: email});
