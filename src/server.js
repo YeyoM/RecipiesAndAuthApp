@@ -22,15 +22,21 @@ app.engine('.hbs', hbs({
     partialsDir: path.join(app.get('views'), 'partials'),
     extname: '.hbs'
 }));
-app.set('view engine', '.hbs')
+app.set('view engine', '.hbs');
+app.set('trust proxy', 1);
 
 //////////////////////////////// MIDDLEWARES
 app.use(morgan('dev'));
 app.use(express.urlencoded({ extended: false }));
 app.use(methodOverride('_method'));
 app.use(session({
+    cookie:{
+        secure: true,
+        maxAge:60000
+    },
+    store: new RedisStore(),
     secret: 'secret',
-    resave: true,
+    resave: false,
     saveUninitialized: true
 }));
 app.use(passport.initialize());
