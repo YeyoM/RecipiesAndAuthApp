@@ -2,7 +2,9 @@
 const app               = require('./server');
                           require('./db');
 
+const port = app.get('port');
+const host = app.get('host');
 
-app.listen(app.get('port'), () => {
-    console.log('Server on port', app.get('port'));
+app.listen(port, host, () => {
+    console.log('server running');
 });
