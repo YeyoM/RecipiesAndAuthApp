@@ -9,7 +9,7 @@
     "server": "nodemon src/index.js",
     "dev": " concurrently -n 'application,webhook' -c 'green,blue' \"npm run server\" \"npm run webhook\"",
     "prod": "node src/index.js",
-    "start": " concurrently -n 'application,webhook -c 'green,blue \"npm run prod\" \"npm run webhook\""
+    "start": " concurrently -n 'application -c 'green \"npm run prod\" "
   },
   "keywords": [],
   "author": "",
