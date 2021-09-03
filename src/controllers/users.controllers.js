@@ -334,7 +334,6 @@ usersCtrl.webhookPost = async (req, res) => {
         // Extract the object from the event.
         data = event.data;
         eventType = event.type;
-        console.log(event)
 
         if (eventType === "invoice.paid") {
             console.log('hola')
