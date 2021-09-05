@@ -26,6 +26,7 @@ app.set('view engine', '.hbs');
 app.set('trust proxy', 1);
 
 //////////////////////////////// MIDDLEWARES
+app.use(cors());
 app.use(morgan('dev'));
 app.use(express.urlencoded({ extended: false }));
 app.use(methodOverride('_method'));
@@ -39,7 +40,7 @@ app.use(session({
     saveUninitialized: true
 }));
 app.use(passport.initialize());
-app.use(passport.session());
+//app.use(passport.session());
 app.use(flash());
 app.use(
     express.json({
