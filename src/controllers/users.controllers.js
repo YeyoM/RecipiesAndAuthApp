@@ -302,7 +302,7 @@ usersCtrl.createCheckoutSession = async (req, res) => {
             cancel_url: `${domainURL}/`,
         })
         req.flash('success_msg', 'Payment recieved successfully, now just confirm email if you have not');
-        console.log(session.url)
+        console.log(session)
         return res.redirect(303, session.url);  
     } catch (e) {
         res.status(400);
