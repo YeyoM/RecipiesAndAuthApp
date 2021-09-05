@@ -29,7 +29,7 @@ app.set('trust proxy', 1);
 app.use(morgan('dev'));
 app.use(express.urlencoded({ extended: false }));
 app.use(methodOverride('_method'));
-/*app.use(session({
+app.use(session({
     cookie:{
         secure: true,
         maxAge:60000
@@ -37,7 +37,7 @@ app.use(methodOverride('_method'));
     secret: 'secret',
     resave: false,
     saveUninitialized: true
-}));*/
+}));
 app.use(passport.initialize());
 app.use(passport.session());
 app.use(flash());
@@ -54,9 +54,6 @@ app.use(
 );
 app.use(function(req, res, next) {
     res.header("Access-Control-Allow-Origin", '*');
-    res.header("Access-Control-Allow-Credentials", true);
-    res.header('Access-Control-Allow-Methods', 'GET,PUT,POST,DELETE,OPTIONS');
-    res.header("Access-Control-Allow-Headers", 'Origin,X-Requested-With,Content-Type,Accept,content-type,application/json');
     next();
 });
 
