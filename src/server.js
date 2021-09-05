@@ -29,7 +29,7 @@ app.set('trust proxy', 1);
 app.use(morgan('dev'));
 app.use(express.urlencoded({ extended: false }));
 app.use(methodOverride('_method'));
-app.use(session({
+/*app.use(session({
     cookie:{
         secure: true,
         maxAge:60000
@@ -37,7 +37,7 @@ app.use(session({
     secret: 'secret',
     resave: false,
     saveUninitialized: true
-}));
+}));*/
 app.use(passport.initialize());
 app.use(passport.session());
 app.use(flash());
