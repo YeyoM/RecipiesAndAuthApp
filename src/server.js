@@ -26,7 +26,7 @@ app.set('view engine', '.hbs');
 app.set('trust proxy', 1);
 
 //////////////////////////////// MIDDLEWARES
-app.use(cors());
+//app.use(cors());
 app.use(morgan('dev'));
 app.use(express.urlencoded({ extended: false }));
 app.use(methodOverride('_method'));
