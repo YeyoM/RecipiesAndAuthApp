@@ -361,6 +361,9 @@ usersCtrl.webhookPost = async (req, res) => {
         console.log(`🔔  Payment received!`);
     }
     res.sendStatus(200);
+    ////////////////////////////////////////////////////////////////
+    res.redirect(process.env.DOMAIN)
+    ////////////////////////////////////////////////////////////////
 };
 usersCtrl.webhookGet = async (req, res) => {
     const { sessionId } = req.query;
