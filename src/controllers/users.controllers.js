@@ -304,7 +304,7 @@ usersCtrl.createCheckoutSession = async (req, res) => {
         })
         req.flash('success_msg', 'Payment recieved successfully, now just confirm email if you have not');
         // res.reditect to domainURL straight
-        return res.redirect(303, process.env.DOMAIN);  
+        return res.redirect(303, session.url);  
     } catch (e) {
         res.status(400);
         return res.send({
