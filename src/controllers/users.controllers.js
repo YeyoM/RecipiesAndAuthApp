@@ -298,12 +298,11 @@ usersCtrl.createCheckoutSession = async (req, res) => {
                 },
             ],
             // ?session_id={CHECKOUT_SESSION_ID} means the redirect will have the session ID set as a query param
-            // no "/" after domainURL
             success_url: `${domainURL}/`,
             cancel_url: `${domainURL}/`,
         })
         req.flash('success_msg', 'Payment recieved successfully, now just confirm email if you have not');
-        // res.reditect to domainURL straight
+        console.log(session.url)
         return res.redirect(303, session.url);  
     } catch (e) {
         res.status(400);
@@ -361,9 +360,6 @@ usersCtrl.webhookPost = async (req, res) => {
         console.log(`🔔  Payment received!`);
     }
     res.sendStatus(200);
-    ////////////////////////////////////////////////////////////////
-    res.redirect(process.env.DOMAIN)
-    ////////////////////////////////////////////////////////////////
 };
 usersCtrl.webhookGet = async (req, res) => {
     const { sessionId } = req.query;
