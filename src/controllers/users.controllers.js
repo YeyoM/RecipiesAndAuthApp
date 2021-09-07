@@ -300,8 +300,8 @@ usersCtrl.createCheckoutSession = async (req, res) => {
             // ?session_id={CHECKOUT_SESSION_ID} means the redirect will have the session ID set as a query param
             //success_url: `${domainURL}/users/signin`,
             //cancel_url: `${domainURL}/`,
-            success_url: window.location.origin + '/users/signin?session_id{CHECKOUT_SESSION_ID}', 
-            cancel_url: window.location.origin,
+            success_url: 'https://animals-recipies-app.herokuapp.com/users/signin?session_id{CHECKOUT_SESSION_ID}', 
+            cancel_url: 'https://animals-recipies-app.herokuapp.com',
         })
         req.flash('success_msg', 'Payment recieved successfully, now just confirm email if you have not');
         console.log(session.url)
