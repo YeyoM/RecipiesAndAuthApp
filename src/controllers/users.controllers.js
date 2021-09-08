@@ -18,9 +18,13 @@ const transporter = nodemailer.createTransport({
 //Users signup
 usersCtrl.renderSignUpForm = async (req, res) => {
     res.render('users/signup');
-    const sessions = await stripe.checkout.sessions.list();
-    const data = sessions.data
-    console.log(data[0].customer);
+    try {
+        const sessions = await stripe.checkout.sessions.list();
+        const data = sessions.data
+        console.log(data[0].customer);
+    } catch (err) {
+        console.log(err);
+    }
 };
 usersCtrl.signUp = async (req, res) => {
     const errors = [];
