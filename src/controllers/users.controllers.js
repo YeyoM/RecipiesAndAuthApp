@@ -54,7 +54,7 @@ usersCtrl.signUp = async (req, res) => {
                     newConfirm.content = emailToken;
                     newConfirm.user = newUser.id;
                     await newConfirm.save();
-                    const url = `http://localhost:4000/users/confirmation/${emailToken}`;
+                    const url = `https://animals-recipies-app.herokuapp.com/users/confirmation/${emailToken}`;
                     transporter.sendMail({
                         to: newUser.email,
                         subject: 'Confirm Email',
@@ -158,23 +158,6 @@ usersCtrl.deleteUser = passport.authenticate('delete-user', {
     successRedirect: '/',
     failureFlash: true
 });
-/*usersCtrl.deleteUser = async (req, res) => {
-    const userId = req.user.id;
-    const password = req.body.password;
-    console.log(password);
-    console.log(userId)
-    const user = await User.findById(userId);
-    const subscriptionId = user.stripeSubscriptionId;
-    const customer = user.stripeId
-    if(subscriptionId != '') {
-        await stripe.subscriptions.del(subscriptionId);
-        await stripe.customers.del(customer);
-    }
-    await User.findByIdAndDelete(userId);
-    res.redirect('/');
-    req.flash('success', 'User deleted successfully');
-
-}*/
 
 //Cancel and Manage subscription
 usersCtrl.cancelSubscription = async (req, res) => {
@@ -213,11 +196,6 @@ usersCtrl.postCustomerPortal = async (req, res) => {
     });
 
     res.redirect(303, portalSession.url);
-
-    ////////////////////////////////////////////////////////////////
-    ////////////////////////////////////////////////////////////////
-    ////////////////////////////////////////////////////////////////
-    // customer portal, solo falta un boton con un form con peticion post a esta func
 };
 
 //Change user´s password
@@ -235,7 +213,7 @@ usersCtrl.createEmailCHangePassword = async (req, res) => {
     const email = user.email
     jwt.sign({ id }, process.env.TOKEN_SECRETO, { expiresIn: 1200, },
         async (err, emailToken) => {
-            const url = `http://localhost:4000/users/changePassword/${emailToken}`;
+            const url = `http://animals-recipies-app.herokuapp.com/users/changePassword/${emailToken}`;
             transporter.sendMail({
                 to: email,
                 subject: 'Change Password',
@@ -394,7 +372,7 @@ usersCtrl.forgotPassword = async (req, res) => {
                 console.log(emailToken)
                 console.log("aaaa")
                 await User.findByIdAndUpdate(id, {forgotPassword: emailToken}).lean();
-                const url = `http://localhost:4000/changeForgotPassword/${emailToken}`;
+                const url = `http://animals-recipies-app.herokuapp.com/changeForgotPassword/${emailToken}`;
                 transporter.sendMail({
                     to: email,
                     subject: 'Change Password',
