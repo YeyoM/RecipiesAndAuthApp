@@ -40,36 +40,42 @@ usersCtrl.signUp = async (req, res) => {
         if (emailUser) {
             req.flash('error_msg', 'Email already in use');
             res.redirect('/users/signup');
-        } else {
-            const customer = await stripe.customers.create({
-                name: name, 
-                email: email,
-            });
-            stripeId = customer.id;
-            stripeInvoicePrefix = customer.invoice_prefix;
-            const newUser = new User({ name, email, password, stripeId, stripeInvoicePrefix });
-            newUser.password = await newUser.encryptPassword(password);
-            newUser.active = false;
-            await newUser.save();
-            const id = newUser.id;
-            jwt.sign({ id }, process.env.TOKEN_SECRETO, { expiresIn: '1d', },
-                async (err, emailToken) => {
-                    const newConfirm = new Confirm({})
-                    newConfirm.content = emailToken;
-                    newConfirm.user = newUser.id;
-                    await newConfirm.save();
-                    const url = `https://animals-recipies-app.herokuapp.com/users/confirmation/${emailToken}`;
-                    transporter.sendMail({
-                        to: newUser.email,
-                        subject: 'Confirm Email',
-                        html: `Please click this link to confirm your email: <a href="${url}">${url}</a>`
-                    })
-                }
-            )
-            const user = await User.findOne({ email: email });
-            const idForSubscription = user.id
-            req.flash('success_msg', 'You are now registered, please confirm your email and proceed with payment')
-            res.redirect(`/users/select-subscription/${idForSubscription}`);
+        } else { 
+            try {
+                const customer = await stripe.customers.create({
+                    name: name, 
+                    email: email,
+                });
+                stripeId = customer.id;
+                stripeInvoicePrefix = customer.invoice_prefix;
+                const newUser = new User({ name, email, password, stripeId, stripeInvoicePrefix });
+                newUser.password = await newUser.encryptPassword(password);
+                newUser.active = false;
+                await newUser.save();
+                const id = newUser.id;
+                jwt.sign({ id }, process.env.TOKEN_SECRETO, { expiresIn: '1d', },
+                    async (err, emailToken) => {
+                        const newConfirm = new Confirm({})
+                        newConfirm.content = emailToken;
+                        newConfirm.user = newUser.id;
+                        await newConfirm.save();
+                        const url = `https://animals-recipies-app.herokuapp.com/users/confirmation/${emailToken}`;
+                        transporter.sendMail({
+                            to: newUser.email,
+                            subject: 'Confirm Email',
+                            html: `Please click this link to confirm your email: <a href="${url}">${url}</a>`
+                        })
+                    }
+                )
+                const user = await User.findOne({ email: email });
+                const idForSubscription = user.id
+                req.flash('success_msg', 'You are now registered, please confirm your email and proceed with payment')
+                res.redirect(`/users/select-subscription/${idForSubscription}`);
+            } catch (err) {
+                console.log(err);
+                req.flash('error_msg', 'Oops! Something went wrong, try again later');
+                res.redirect('/')
+            }
         }
     }
 };
@@ -136,8 +142,14 @@ usersCtrl.logOut = (req, res) => {
 
 //Change user´s name
 usersCtrl.updateUser = async (req, res) => {
-    const user = await User.findById(req.user.id).lean();
-    res.render('users/changeName', { user });
+    try {
+        const user = await User.findById(req.user.id).lean();
+        res.render('users/changeName', { user });
+    } catch (err) {
+        console.log(err);
+        req.flash('error_msg', 'Oops, having trouble on that page, try again later');
+        res.redirect('/');
+    }
 };
 usersCtrl.updateName = async (req, res) => {
     const { name } = req.body;
@@ -154,8 +166,14 @@ usersCtrl.updateName = async (req, res) => {
 
 //Delete User
 usersCtrl.deleteUserForm = async (req, res) => {
-    const user = await User.findById(req.user.id).lean();
-    res.render('users/deleteUser', { user })
+    try{
+        const user = await User.findById(req.user.id).lean();
+        res.render('users/deleteUser', { user })
+    } catch (err) {
+        console.log(err);
+        req.flash('error_msg', 'Oops, having trouble on that page, try again later');
+        res.redirect('/');
+    }
 }
 usersCtrl.deleteUser = passport.authenticate('delete-user', { 
     failureRedirect: '/users/deleteUser',
@@ -164,7 +182,7 @@ usersCtrl.deleteUser = passport.authenticate('delete-user', {
 });
 
 //Cancel and Manage subscription
-usersCtrl.cancelSubscription = async (req, res) => {
+/*sersCtrl.cancelSubscription = async (req, res) => {
     const userId = req.user.id;
     const user = await User.findById(userId);
     const subscriptionId = user.stripeSubscriptionId;
@@ -188,9 +206,9 @@ usersCtrl.manageSubscriptionForm = async (req, res) => {
     userSubscription.month = date.getMonth();
     console.log(userSubscription);
     res.render('users/manageSub', { user, userSubscription });
-}
+}*/
 usersCtrl.postCustomerPortal = async (req, res) => {
-    const returnUrl = process.env.DOMAIN;
+    const returnUrl = 'https://animals-recipies-app.herokuapp.com/users/signin?session_id{CHECKOUT_SESSION_ID}';
     const user = await User.findById(req.user.id).lean();
     const customer = user.stripeId
 
