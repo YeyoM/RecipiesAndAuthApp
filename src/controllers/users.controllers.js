@@ -191,7 +191,7 @@ usersCtrl.deleteUser = passport.authenticate('delete-user', {
     req.logout();
     req.flash('success_msg', 'Subscription cancelled successfully');
     res.redirect('/');
-}
+}*/
 usersCtrl.manageSubscriptionForm = async (req, res) => {
     const user = await User.findById(req.user.id).lean();
     const subscription = await stripe.subscriptions.retrieve(user.stripeSubscriptionId);
@@ -206,7 +206,7 @@ usersCtrl.manageSubscriptionForm = async (req, res) => {
     userSubscription.month = date.getMonth();
     console.log(userSubscription);
     res.render('users/manageSub', { user, userSubscription });
-}*/
+}
 usersCtrl.postCustomerPortal = async (req, res) => {
     const returnUrl = 'https://animals-recipies-app.herokuapp.com/users/signin?session_id{CHECKOUT_SESSION_ID}';
     const user = await User.findById(req.user.id).lean();

@@ -65,8 +65,7 @@ router.delete('/users/deleteUser/:id', isAuthenticated, deleteUser);
 //Manage Subscription
 router.get('/users/manageSubscription', isAuthenticated, manageSubscriptionForm);
 router.post('/users/customerPortal', isAuthenticated, postCustomerPortal);
-router.delete('/users/cancelSubscription/:id', isAuthenticated, cancelSubscription);
-//si no jala es delete aqui arriba, igual con delete user
+//router.delete('/users/cancelSubscription/:id', isAuthenticated, cancelSubscription);
 
 //Change user´s password
 router.get('/users/changePasswordLanding', isAuthenticated, changePasswordLanding);
