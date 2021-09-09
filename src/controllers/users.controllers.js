@@ -208,7 +208,7 @@ usersCtrl.manageSubscriptionForm = async (req, res) => {
     res.render('users/manageSub', { user, userSubscription });
 }
 usersCtrl.postCustomerPortal = async (req, res) => {
-    const returnUrl = 'https://animals-recipies-app.herokuapp.com/users/signin?session_id{CHECKOUT_SESSION_ID}';
+    const returnUrl = 'https://animals-recipies-app.herokuapp.com/users/updateName?session_id{CHECKOUT_SESSION_ID}';
     const user = await User.findById(req.user.id).lean();
     const customer = user.stripeId
 
