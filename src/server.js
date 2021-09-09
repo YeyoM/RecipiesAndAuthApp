@@ -32,7 +32,6 @@ app.use(methodOverride('_method'));
 app.use(session({
     cookie:{
         secure: true,
-        maxAge:60000
     },
     secret: 'secret',
     resave: false,

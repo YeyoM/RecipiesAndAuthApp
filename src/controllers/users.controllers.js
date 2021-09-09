@@ -93,6 +93,8 @@ usersCtrl.confirmPost = async (req, res) => {
         res.redirect("/users/signin");
     } catch (err) {
         console.log(err);
+        req.flash('error_msg', 'Oops! Something went wrong, try again later');
+        res.redirect('/');
     };
 };
 
@@ -111,7 +113,8 @@ usersCtrl.renderSignInFormForSubscription = (req, res) => {
     res.render('users/signinSubs');
 };
 usersCtrl.signInForSubscription = async(req, res, next) => { 
-    const checkUser = await User.findOne({ email: req.body.email})
+    try {
+        const checkUser = await User.findOne({ email: req.body.email})
     if(checkUser.suscribed == true) {
         req.flash('success_msg', 'You are already suscribed, just log in into your account');
         res.redirect('/users/signin');
@@ -130,6 +133,11 @@ usersCtrl.signInForSubscription = async(req, res, next) => {
                 return res.redirect(`/users/select-subscription/${id}`);
             });
         })(req, res, next);
+    }
+    } catch (err) {
+        console.log(err);
+        req.flash('error_msg', 'Oops! Something went wrong, try again later');
+        res.redirect('/');
     }
 };
 
@@ -181,17 +189,6 @@ usersCtrl.deleteUser = passport.authenticate('delete-user', {
     failureFlash: true
 });
 
-//Cancel and Manage subscription
-/*sersCtrl.cancelSubscription = async (req, res) => {
-    const userId = req.user.id;
-    const user = await User.findById(userId);
-    const subscriptionId = user.stripeSubscriptionId;
-    await stripe.subscriptions.del(subscriptionId);
-    await User.findByIdAndUpdate(req.user.id, {stripeSubscriptionId: '', suscribed: false})
-    req.logout();
-    req.flash('success_msg', 'Subscription cancelled successfully');
-    res.redirect('/');
-}*/
 usersCtrl.manageSubscriptionForm = async (req, res) => {
     const user = await User.findById(req.user.id).lean();
     const subscription = await stripe.subscriptions.retrieve(user.stripeSubscriptionId);
@@ -208,16 +205,20 @@ usersCtrl.manageSubscriptionForm = async (req, res) => {
     res.render('users/manageSub', { user, userSubscription });
 }
 usersCtrl.postCustomerPortal = async (req, res) => {
-    const returnUrl = 'https://animals-recipies-app.herokuapp.com/users/updateName?session_id{CHECKOUT_SESSION_ID}';
-    const user = await User.findById(req.user.id).lean();
-    const customer = user.stripeId
-
-    const portalSession = await stripe.billingPortal.sessions.create({
-        customer: customer,
-        return_url: returnUrl,
-    });
-
-    res.redirect(303, portalSession.url);
+    try {
+        const returnUrl = 'https://animals-recipies-app.herokuapp.com/users/updateName?session_id{CHECKOUT_SESSION_ID}';
+        const user = await User.findById(req.user.id).lean();
+        const customer = user.stripeId
+        const portalSession = await stripe.billingPortal.sessions.create({
+            customer: customer,
+            return_url: returnUrl,
+        });
+        res.redirect(303, portalSession.url);
+    } catch (err) {
+        console.log(err);
+        req.flash('error_msg', 'Oops, having trouble on that page, try again later');
+        res.redirect('/');
+    }
 };
 
 //Change user´s password
@@ -230,21 +231,28 @@ usersCtrl.changePasswordLanding = async (req, res) => {
     res.render('users/changePasswordLanding', { user })
 };
 usersCtrl.createEmailCHangePassword = async (req, res) => {
-    const id = req.user.id;
-    const user = await User.findById(id).lean();
-    const email = user.email
-    jwt.sign({ id }, process.env.TOKEN_SECRETO, { expiresIn: 1200, },
-        async (err, emailToken) => {
-            const url = `http://animals-recipies-app.herokuapp.com/users/changePassword/${emailToken}`;
-            transporter.sendMail({
-                to: email,
-                subject: 'Change Password',
-                html: `Please click this link to change and set your new Password: <a href="${url}">${url}</a>`
-            })
-        }
-    )
-    req.flash('success_msg', 'Please check your Email inbox and click the link to change your password')
-    res.redirect('/');
+    try {
+        const id = req.user.id;
+        const user = await User.findById(id).lean();
+        const email = user.email
+        jwt.sign({ id }, process.env.TOKEN_SECRETO, { expiresIn: 1200, },
+            async (err, emailToken) => {
+                const url = `http://animals-recipies-app.herokuapp.com/users/changePassword/${emailToken}`;
+                transporter.sendMail({
+                    to: email,
+                    subject: 'Change Password',
+                    html: `Please click this link to change and set your new Password: <a href="${url}">${url}</a>`
+                })
+            }
+        )
+        req.flash('success_msg', 'Please check your Email inbox and click the link to change your password')
+        res.redirect('/');
+    } catch (err) {
+        console.log(err);
+        req.flash('error_msg', 'Oops, having trouble on that page, try again later');
+        res.redirect('/');
+    }
+    
 };
 usersCtrl.updatePassword = async (req, res) => {
     const errors = [];
