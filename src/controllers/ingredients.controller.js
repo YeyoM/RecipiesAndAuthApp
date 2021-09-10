@@ -34,22 +34,41 @@ ingredientsCtrl.createIngredient = async (req, res) => {
 }
 
 ingredientsCtrl.renderIngredients = async (req, res) => {
-    const ingredients = await Ingredient.find({user: req.user.id}).sort({createdAt: 'desc'}).lean();
-    res.render('ingredients/allIngredients', { ingredients });
+    try {
+        const ingredients = await Ingredient.find({user: req.user.id}).sort({createdAt: 'desc'}).lean();
+        res.render('ingredients/allIngredients', { ingredients });
+    } catch (err) {
+        console.log(err);
+        req.flash('error_msg', 'Oops! Something went wrong, try again later');
+        res.redirect('/')
+    }
 }
 
 ingredientsCtrl.renderIngredient = async (req, res) => {
-    const ingredient = await Ingredient.findById(req.params.id).lean();
-    res.render('ingredients/ingredient', { ingredient})
+    try {
+        const ingredient = await Ingredient.findById(req.params.id).lean();
+        res.render('ingredients/ingredient', { ingredient})
+    } catch (err) {
+        console.log(err);
+        req.flash('error_msg', 'Oops! Something went wrong, try again later');
+        res.redirect('/');
+    }
 }
 
 ingredientsCtrl.renderEditForm = async (req, res) => {
-    const ingredient = await Ingredient.findById(req.params.id).lean();
-    if( ingredient.user != req.user.id ) {
-        req.flash('error_msg', 'Oops! you are not authorized to access here');
-        return res.redirect('/ingredients');
+    try {
+        const ingredient = await Ingredient.findById(req.params.id).lean();
+        if( ingredient.user != req.user.id ) {
+            req.flash('error_msg', 'Oops! you are not authorized to access here');
+            return res.redirect('/ingredients');
+        }
+        res.render('ingredients/editIngredient', { ingredient });
+    } catch (err) {
+        console.log(err);
+        req.flash('error_msg', 'Oops! Something went wrong, try again later');
+        res.redirect('/');
     }
-    res.render('ingredients/editIngredient', { ingredient });
+    
 }
 
 ingredientsCtrl.updateIngredient = async (req, res) => {
@@ -80,9 +99,16 @@ ingredientsCtrl.updateIngredient = async (req, res) => {
 }
 
 ingredientsCtrl.deleteIngredient = async (req, res) => {
-    await Ingredient.findByIdAndDelete(req.params.id);
-    req.flash('success_msg', 'Ingredient Deleted Successfully')
-    res.redirect('/ingredients');
+    try {
+        await Ingredient.findByIdAndDelete(req.params.id);
+        req.flash('success_msg', 'Ingredient Deleted Successfully')
+        res.redirect('/ingredients');
+    } catch(err) {
+        console.log(err);
+        req.flash('error_msg', 'Oops! Something went wrong, try again later');
+        res.redirect('/');
+    }
+    
 }
 
 module.exports = ingredientsCtrl;
