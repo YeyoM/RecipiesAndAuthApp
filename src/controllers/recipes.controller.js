@@ -35,7 +35,7 @@ recipesCtrl.createRecipe = async (req, res) => {
         req.flash('error_msg', 'Please fill in the form correctly');
         res.redirect('/recipes/add');
     }           
-}
+};
 
 recipesCtrl.renderRecipes = async (req, res) => {
     try {
@@ -46,7 +46,7 @@ recipesCtrl.renderRecipes = async (req, res) => {
         req.flash('error_msg', 'Oops! Something went wrong, try again later');
         res.redirect('/');
     }
-}
+};
 
 recipesCtrl.renderRecipe = async (req, res) => {
     try {
@@ -78,7 +78,7 @@ recipesCtrl.renderRecipe = async (req, res) => {
         req.flash('error_msg', 'Oops! Something went wrong, try again later');
         res.redirect('/');
     }
-}
+};
 
 recipesCtrl.renderEditForm = async (req, res) => {
     try {
@@ -93,7 +93,7 @@ recipesCtrl.renderEditForm = async (req, res) => {
         req.flash('error_msg', 'Oops! Something went wrong, try again later');
         res.redirect('/');
     }
-}
+};
 
 recipesCtrl.updateRecipe = async (req, res) => {
     const { 
@@ -120,7 +120,7 @@ recipesCtrl.updateRecipe = async (req, res) => {
         req.flash('error_msg', 'Please fill in the form correctly');
         res.redirect('/recipes/add');
     }
-}
+};
 
 recipesCtrl.deleteRecipe = async (req, res) => {
     try {
@@ -132,7 +132,7 @@ recipesCtrl.deleteRecipe = async (req, res) => {
         req.flash('error_msg', 'Oops! Something went wrong, try again later');
         res.redirect('/');
     }
-}
+};
 
 module.exports = recipesCtrl;
 

@@ -1,20 +1,20 @@
-const express = require('express');
-const path = require('path');
-const hbs = require('express-handlebars');
-const morgan = require('morgan');
-const methodOverride = require('method-override');
-const flash = require('connect-flash');
-const session = require('express-session');
-const passport = require('passport');
+const express           = require('express');
+const path              = require('path');
+const hbs               = require('express-handlebars');
+const morgan            = require('morgan');
+const methodOverride    = require('method-override');
+const flash             = require('connect-flash');
+const session           = require('express-session');
+const passport          = require('passport');
 
 
 //////////////////////////////// INITIALIZER
-const app = express();
-require('./config/passport')
+const app               = express();
+require('./config/passport');
 
 //////////////////////////////// SETTINGS
 app.set('port', process.env.PORT || 4000);
-app.set('host', process.env.HOST || '0.0.0.0')
+app.set('host', process.env.HOST || '0.0.0.0');
 app.set('views', path.join(__dirname, 'views'));
 app.engine('.hbs', hbs({
     defaultLayout: 'main',
@@ -71,7 +71,7 @@ app.use(express.static(path.join(__dirname, 'public')));
 //////////////////////////////// ROUTES
 app.use(require('./routes/index.routes'));
 app.use(require('./routes/ingredients.routes'));
-app.use(require('./routes/recipes.routes'))
+app.use(require('./routes/recipes.routes'));
 app.use(require('./routes/users.routes'));
 
 

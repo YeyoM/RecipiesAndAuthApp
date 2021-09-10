@@ -87,7 +87,7 @@ router.get('/changeForgotPassword/:s', changeForgotPasswordForm);
 router.post('/changeForgotPassword/:s', changeForgotPassword);
 
 //404
-router.use(page404)
+router.use(page404);
 
 
 module.exports = router;

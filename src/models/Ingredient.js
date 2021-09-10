@@ -31,7 +31,7 @@ const IngredientSchema = new Schema({
     },
 }, {
     timestamps: true
-})
+});
 
 module.exports = model('Ingredient', IngredientSchema, 'ingredients');
 

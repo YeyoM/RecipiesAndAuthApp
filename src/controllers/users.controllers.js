@@ -1,10 +1,10 @@
-const usersCtrl = {};
-const User = require('../models/User');
-const Confirm = require('../models/Confirms');
-const passport = require('passport');
-const jwt = require('jsonwebtoken');
-const nodemailer = require('nodemailer');
-const stripe = require('stripe')(process.env.STRIPE_SECRET_KEY);
+const usersCtrl         = {};
+const User              = require('../models/User');
+const Confirm           = require('../models/Confirms');
+const passport          = require('passport');
+const jwt               = require('jsonwebtoken');
+const nodemailer        = require('nodemailer');
+const stripe            = require('stripe')(process.env.STRIPE_SECRET_KEY);
 
 // config nodemailer rapidooooo
 const transporter = nodemailer.createTransport({
@@ -20,7 +20,7 @@ usersCtrl.renderSignUpForm = async (req, res) => {
     res.render('users/signup');
     try {
         const sessions = await stripe.checkout.sessions.list();
-        const data = sessions.data
+        const data = sessions.data;
         console.log(data[0].customer);
     } catch (err) {
         console.log(err);
@@ -55,7 +55,7 @@ usersCtrl.signUp = async (req, res) => {
                 const id = newUser.id;
                 jwt.sign({ id }, process.env.TOKEN_SECRETO, { expiresIn: '1d', },
                     async (err, emailToken) => {
-                        const newConfirm = new Confirm({})
+                        const newConfirm = new Confirm({});
                         newConfirm.content = emailToken;
                         newConfirm.user = newUser.id;
                         await newConfirm.save();
@@ -64,17 +64,17 @@ usersCtrl.signUp = async (req, res) => {
                             to: newUser.email,
                             subject: 'Confirm Email',
                             html: `Please click this link to confirm your email: <a href="${url}">${url}</a>`
-                        })
+                        });
                     }
                 )
                 const user = await User.findOne({ email: email });
-                const idForSubscription = user.id
-                req.flash('success_msg', 'You are now registered, please confirm your email and proceed with payment')
+                const idForSubscription = user.id;
+                req.flash('success_msg', 'You are now registered, please confirm your email and proceed with payment');
                 res.redirect(`/users/select-subscription/${idForSubscription}`);
             } catch (err) {
                 console.log(err);
                 req.flash('error_msg', 'Oops! Something went wrong, try again later');
-                res.redirect('/')
+                res.redirect('/');
             }
         }
     }
@@ -82,7 +82,7 @@ usersCtrl.signUp = async (req, res) => {
 
 //Confirm email
 usersCtrl.confirmPost = async (req, res) => {
-    token = req.originalUrl.slice(20)
+    token = req.originalUrl.slice(20);
     const { user, content } = await Confirm.findOne({ content: token }).lean();
     try {
         jwt.verify(token, process.env.TOKEN_SECRETO);
@@ -114,7 +114,7 @@ usersCtrl.renderSignInFormForSubscription = (req, res) => {
 };
 usersCtrl.signInForSubscription = async(req, res, next) => { 
     try {
-        const checkUser = await User.findOne({ email: req.body.email})
+        const checkUser = await User.findOne({ email: req.body.email});
     if(checkUser.suscribed == true) {
         req.flash('success_msg', 'You are already suscribed, just log in into your account');
         res.redirect('/users/signin');
@@ -128,8 +128,8 @@ usersCtrl.signInForSubscription = async(req, res, next) => {
                 if (err) { 
                     return next(err); 
                 }
-                const id = user.id
-                console.log(id)
+                const id = user.id;
+                console.log(id);
                 return res.redirect(`/users/select-subscription/${id}`);
             });
         })(req, res, next);
@@ -176,13 +176,13 @@ usersCtrl.updateName = async (req, res) => {
 usersCtrl.deleteUserForm = async (req, res) => {
     try{
         const user = await User.findById(req.user.id).lean();
-        res.render('users/deleteUser', { user })
+        res.render('users/deleteUser', { user });
     } catch (err) {
         console.log(err);
         req.flash('error_msg', 'Oops, having trouble on that page, try again later');
         res.redirect('/');
     }
-}
+};
 usersCtrl.deleteUser = passport.authenticate('delete-user', { 
     failureRedirect: '/users/deleteUser',
     successRedirect: '/',
@@ -194,21 +194,21 @@ usersCtrl.manageSubscriptionForm = async (req, res) => {
     const subscription = await stripe.subscriptions.retrieve(user.stripeSubscriptionId);
     const unix_timestamp = subscription.billing_cycle_anchor;
     const userSubscription = {};
-    userSubscription.planId = subscription.plan.id
-    userSubscription.amount = subscription.plan.amount / 100
-    userSubscription.interval = subscription.plan.interval
-    userSubscription.product = subscription.plan.product
+    userSubscription.planId = subscription.plan.id;
+    userSubscription.amount = subscription.plan.amount / 100;
+    userSubscription.interval = subscription.plan.interval;
+    userSubscription.product = subscription.plan.product;
     const date = new Date(unix_timestamp * 1000);
     userSubscription.day = date.getDate();
     userSubscription.month = date.getMonth();
     console.log(userSubscription);
     res.render('users/manageSub', { user, userSubscription });
-}
+};
 usersCtrl.postCustomerPortal = async (req, res) => {
     try {
         const returnUrl = 'https://animals-recipies-app.herokuapp.com/users/updateName?session_id{CHECKOUT_SESSION_ID}';
         const user = await User.findById(req.user.id).lean();
-        const customer = user.stripeId
+        const customer = user.stripeId;
         const portalSession = await stripe.billingPortal.sessions.create({
             customer: customer,
             return_url: returnUrl,
@@ -224,17 +224,17 @@ usersCtrl.postCustomerPortal = async (req, res) => {
 //Change user´s password
 usersCtrl.changePasswordForm = async (req, res) => {
     const user = await User.findById(req.user.id).lean();
-    res.render('users/changePassword', { user })
+    res.render('users/changePassword', { user });
 };
 usersCtrl.changePasswordLanding = async (req, res) => {
     const user = await User.findById(req.user.id).lean();
-    res.render('users/changePasswordLanding', { user })
+    res.render('users/changePasswordLanding', { user });
 };
 usersCtrl.createEmailCHangePassword = async (req, res) => {
     try {
         const id = req.user.id;
         const user = await User.findById(id).lean();
-        const email = user.email
+        const email = user.email;
         jwt.sign({ id }, process.env.TOKEN_SECRETO, { expiresIn: 1200, },
             async (err, emailToken) => {
                 const url = `http://animals-recipies-app.herokuapp.com/users/changePassword/${emailToken}`;
@@ -242,10 +242,10 @@ usersCtrl.createEmailCHangePassword = async (req, res) => {
                     to: email,
                     subject: 'Change Password',
                     html: `Please click this link to change and set your new Password: <a href="${url}">${url}</a>`
-                })
+                });
             }
         )
-        req.flash('success_msg', 'Please check your Email inbox and click the link to change your password')
+        req.flash('success_msg', 'Please check your Email inbox and click the link to change your password');
         res.redirect('/');
     } catch (err) {
         console.log(err);
@@ -267,11 +267,11 @@ usersCtrl.updatePassword = async (req, res) => {
         res.render('users/signup', { errors });
     } else {
         const newPassword = new User({ password });
-        newPassword.password = await newPassword.encryptPassword(password)
+        newPassword.password = await newPassword.encryptPassword(password);
         try {
             await User.findByIdAndUpdate(req.user.id, { password: newPassword.password }).lean();
             req.flash('success_msg', 'Password updated Successfully');
-            res.redirect('/')
+            res.redirect('/');
         } catch (err) {
             console.log(err);
             req.flash('error_msg', 'Please fill in the form correctly');
@@ -282,15 +282,15 @@ usersCtrl.updatePassword = async (req, res) => {
 
 //Paymentssssssssssssss
 usersCtrl.renderSubs = (req, res) => {
-    const id = req.originalUrl.slice(27)
-    res.render('users/selectSubs', { id })
+    const id = req.originalUrl.slice(27);
+    res.render('users/selectSubs', { id });
 };
 usersCtrl.createCheckoutSession = async (req, res) => {
     const domainURL = process.env.DOMAIN;
     const price = process.env.BASIC_PRICE_ID;
     const id = req.originalUrl.slice(25);
     const user = await User.findById(id).lean();
-    const customerId = user.stripeId
+    const customerId = user.stripeId;
     
 
     // Create new Checkout Session for the order
@@ -312,7 +312,7 @@ usersCtrl.createCheckoutSession = async (req, res) => {
             cancel_url: 'https://animals-recipies-app.herokuapp.com',
         })
         req.flash('success_msg', 'Payment recieved successfully, now just confirm email if you have not');
-        console.log(session.url)
+        console.log(session.url);
         return res.redirect(303, session.url);  
     } catch (e) {
         res.status(400);
@@ -387,20 +387,20 @@ usersCtrl.config = (req, res) => {
 
 //Forgot Password
 usersCtrl.renderForgotPassword = (req, res) => {
-    res.render('users/forgotPassword')
-}
+    res.render('users/forgotPassword');
+};
 usersCtrl.forgotPassword = async (req, res) => {
     const email = req.body.email;
     console.log(email);
     const user = await User.findOne({ email: email }).lean();
     const id = user._id;
-    console.log(id)
+    console.log(id);
     try {
         jwt.sign({ id }, process.env.TOKEN_SECRETO, { expiresIn: '1d', },
             async (err, emailToken) => {
-                console.log("aaaaa")
-                console.log(emailToken)
-                console.log("aaaa")
+                console.log("aaaaa");
+                console.log(emailToken);
+                console.log("aaaa");
                 await User.findByIdAndUpdate(id, {forgotPassword: emailToken}).lean();
                 const url = `http://animals-recipies-app.herokuapp.com/changeForgotPassword/${emailToken}`;
                 transporter.sendMail({
@@ -410,11 +410,11 @@ usersCtrl.forgotPassword = async (req, res) => {
                 })
             }
         )
-        req.flash('success_msg', 'Please check your Email inbox and click the link to set a new password')
+        req.flash('success_msg', 'Please check your Email inbox and click the link to set a new password');
         res.render('users/signin');
     } catch (err) {
         req.flash('error_msg', 'We could not find the email address, type a valid email address');
-        res.render('users/signin')
+        res.render('users/signin');
     }
 }
 const findUser = function findUser(param, callback){
@@ -427,21 +427,21 @@ const findUser = function findUser(param, callback){
             return callback();
         }
     });
-}
+};
 usersCtrl.changeForgotPassword = async(req, res) => {
-    console.log(req.body)
+    console.log(req.body);
     const forgotPassword = req.body.forgotPassword;
-    console.log(forgotPassword)
+    console.log(forgotPassword);
     try {
         findUser(forgotPassword, async function(error, user) {
             console.log(user);
             const id = user.id;
-            console.log(id)
+            console.log(id);
             const errors = [];
             const {
                 password, confirm_password
             } = req.body;
-            console.log(password, confirm_password)
+            console.log(password, confirm_password);
             if (password != confirm_password) {
                 errors.push({ text: 'Passwords do not match' });
             } if (password.length < 5) {
@@ -450,7 +450,7 @@ usersCtrl.changeForgotPassword = async(req, res) => {
                 res.render('users/signup', { errors });
             } else {
                 const newPassword = new User({ password });
-                newPassword.password = await newPassword.encryptPassword(password)
+                newPassword.password = await newPassword.encryptPassword(password);
                 try {
                     await User.findByIdAndUpdate(id, { password: newPassword.password }).lean();
                     await User.findByIdAndUpdate(id, { forgotPassword: ""}).lean();

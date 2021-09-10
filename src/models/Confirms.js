@@ -11,6 +11,6 @@ const ConfirmSchema = new Schema({
     },
 }, {
     timestamps: true
-})
+});
 
 module.exports = model('Confirm', ConfirmSchema, 'confirms');

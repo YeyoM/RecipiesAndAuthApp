@@ -3,7 +3,7 @@ const Ingredient          = require('../models/Ingredient');
 
 ingredientsCtrl.renderIngredientForm = (req, res) => {
     res.render('ingredients/newIngredient');
-}
+};
 
 ingredientsCtrl.createIngredient = async (req, res) => {
     const { title, 
@@ -31,7 +31,7 @@ ingredientsCtrl.createIngredient = async (req, res) => {
         req.flash('error_msg', 'Please fill in the form correctly');
         res.redirect('/ingredients/add');
     }           
-}
+};
 
 ingredientsCtrl.renderIngredients = async (req, res) => {
     try {
@@ -42,7 +42,7 @@ ingredientsCtrl.renderIngredients = async (req, res) => {
         req.flash('error_msg', 'Oops! Something went wrong, try again later');
         res.redirect('/');
     }
-}
+};
 
 ingredientsCtrl.renderIngredient = async (req, res) => {
     try {
@@ -53,7 +53,7 @@ ingredientsCtrl.renderIngredient = async (req, res) => {
         req.flash('error_msg', 'Oops! Something went wrong, try again later');
         res.redirect('/');
     }
-}
+};
 
 ingredientsCtrl.renderEditForm = async (req, res) => {
     try {
@@ -68,8 +68,7 @@ ingredientsCtrl.renderEditForm = async (req, res) => {
         req.flash('error_msg', 'Oops! Something went wrong, try again later');
         res.redirect('/');
     }
-    
-}
+};
 
 ingredientsCtrl.updateIngredient = async (req, res) => {
     const { 
@@ -96,7 +95,7 @@ ingredientsCtrl.updateIngredient = async (req, res) => {
         req.flash('error_msg', 'Please fill in the form correctly');
         res.redirect('/ingredients/add');
     }
-}
+};
 
 ingredientsCtrl.deleteIngredient = async (req, res) => {
     try {
@@ -108,7 +107,6 @@ ingredientsCtrl.deleteIngredient = async (req, res) => {
         req.flash('error_msg', 'Oops! Something went wrong, try again later');
         res.redirect('/');
     }
-    
-}
+};
 
 module.exports = ingredientsCtrl;

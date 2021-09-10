@@ -37,7 +37,7 @@ const UserSchema = new Schema({
     }
 }, {
     timestamps: true
-})
+});
 
 UserSchema.methods.encryptPassword = async password => {
     const salt = await bcrypt.genSalt(10);
@@ -46,7 +46,7 @@ UserSchema.methods.encryptPassword = async password => {
 
 UserSchema.methods.matchPassword = async function(password) {
     return await bcrypt.compare(password, this.password);
-}
+};
 
 module.exports = model('User', UserSchema, 'users');
 

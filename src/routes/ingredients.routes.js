@@ -21,7 +21,7 @@ router.post('/ingredients/new-ingredient', isAuthenticated, createIngredient);
 router.get('/ingredients', isAuthenticated ,renderIngredients);
 
 //////////////////////////////// GET ONE INGREDIENT
-router.get('/ingredient/:id', isAuthenticated, renderIngredient)
+router.get('/ingredient/:id', isAuthenticated, renderIngredient);
 
 //////////////////////////////// EDIT INGREDIENT
 router.get('/ingredients/edit/:id', isAuthenticated, renderEditForm);

@@ -3,7 +3,7 @@ const router            = Router();
 const { 
     renderIndex, 
     renderAbout 
-}                       = require('../controllers/index.controllers')
+}                       = require('../controllers/index.controllers');
 
 router.get('/', renderIndex);
 

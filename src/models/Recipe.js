@@ -19,6 +19,6 @@ const RecipeSchema = new Schema({
     },
 }, {
     timestamps: true
-})
+});
 
 module.exports = model('Recipe', RecipeSchema, 'recipes');

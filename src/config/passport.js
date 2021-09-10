@@ -22,7 +22,7 @@ passport.use('login-normal', new LocalStrategy({
         const match = await user.matchPassword(password);
         if (match) {
             await Confirm.findOneAndDelete({user: user._id});
-            console.log(user.id)
+            console.log(user.id);
             return done(null, user);
         } else {
             return done(null, false, { message: 'Incorrect Password'});
@@ -68,13 +68,13 @@ passport.use('delete-user', new LocalStrategy ({
         const match = await user.matchPassword(password);
         if (match) {
             const subscriptionId = user.stripeSubscriptionId;
-            const customer = user.stripeId
+            const customer = user.stripeId;
             if(subscriptionId != '') {
                 try {
                     await stripe.subscriptions.del(subscriptionId);
                     await stripe.customers.del(customer);
                 } catch (err) {
-                    console.log(err)
+                    console.log(err);
                 }
             }
             await User.findByIdAndDelete(userId);
