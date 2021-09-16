@@ -11,7 +11,7 @@ passport.use('login-normal', new LocalStrategy({
 }, async (email, password, done) => {
     // Match user's email
     const user = await User.findOne({ email });
-    const id = user.id;
+    const id = user._id;
     const subs = user.stripeSubscriptionId;
     if ( subs != 'not_subscribed' ){
         try {
