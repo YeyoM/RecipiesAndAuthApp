@@ -12,24 +12,7 @@ passport.use('login-normal', new LocalStrategy({
     // Match user's email
     const user = await User.findOne({ email });
     console.log(user)
-    const id = user._id;
     const subs = user.stripeSubscriptionId;
-    if ( subs != 'not_subscribed' ){
-        try {
-            const subscription = await stripe.subscriptions.retrieve(subs);
-            const status = subscription.status;
-            console.log(status)
-            if(status != "active"){
-                try {
-                    await User.findOneAndUpdate(email, {suscribed: false});
-                } catch(err) {
-                    console.log(err);
-                }
-            }
-        } catch (err) {
-            console.log(err);
-        }
-    }
     if (!user) {
         return done(null, false, { message: 'User Not Found'}); //error
     } else if (!user.suscribed) {
@@ -41,7 +24,23 @@ passport.use('login-normal', new LocalStrategy({
         const match = await user.matchPassword(password);
         if (match) {
             await Confirm.findOneAndDelete({user: user._id});
-            console.log(user.id);
+            if ( subs != 'not_subscribed' ){
+                try {
+                    const subscription = await stripe.subscriptions.retrieve(subs);
+                    const status = subscription.status;
+                    console.log(status)
+                    if(status != "active"){
+                        try {
+                            await User.findOneAndUpdate(email, {suscribed: false});
+                            return done(null, false, { message: 'You need to be suscribed to login'});
+                        } catch(err) {
+                            console.log(err);
+                        }
+                    }
+                } catch (err) {
+                    console.log(err);
+                }
+            }
             return done(null, user);
         } else {
             return done(null, false, { message: 'Incorrect Password'});
