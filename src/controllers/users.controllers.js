@@ -309,13 +309,14 @@ usersCtrl.createCheckoutSession = async (req, res) => {
             //success_url: `${domainURL}/users/signin`,
             //cancel_url: `${domainURL}/`,
             success_url: 'https://animals-recipies-app.herokuapp.com/users/signin?session_id{CHECKOUT_SESSION_ID}', 
-            cancel_url: 'https://animals-recipies-app.herokuapp.com',
+            cancel_url: 'https://animals-recipies-app.herokuapp.com/users/signin?session_id{CHECKOUT_SESSION_ID}',
         })
         req.flash('success_msg', 'Payment recieved successfully, now just confirm email if you have not');
         console.log(session.url);
         return res.redirect(303, session.url);  
     } catch (e) {
         res.status(400);
+        req.flash('error_msg', 'Oops, having trouble on that page, try again later');
         return res.send({
             error: {
                 message: e.message,
