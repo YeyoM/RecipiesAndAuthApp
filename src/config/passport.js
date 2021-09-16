@@ -20,7 +20,13 @@ passport.use('login-normal', new LocalStrategy({
             const status = subscription.status;
             console.log(status)
             if(status != "active"){
-                user.findByIdAndUpdate(id, {suscribed: false});
+                try {
+                    await user.findByIdAndUpdate(id, {suscribed: false});
+                } catch(err) {
+                    onsole.log(err);
+                    req.flash('error_msg', 'Oops! Something went wrong, try again later');
+                    res.redirect('/');  
+                }
             }
         } catch (err) {
             console.log(err);
