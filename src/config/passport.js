@@ -21,16 +21,14 @@ passport.use('login-normal', new LocalStrategy({
             console.log(status)
             if(status != "active"){
                 try {
-                    await user.findByIdAndUpdate(id, {suscribed: false});
+                    await user.findOneAndUpdate(email, {suscribed: false});
                 } catch(err) {
                     console.log(err);
-                    req.flash('error_msg', 'Oops! Something went wrong, try again later');
                     res.redirect('/');  
                 }
             }
         } catch (err) {
             console.log(err);
-            req.flash('error_msg', 'Oops! Something went wrong, try again later');
             res.redirect('/');
         }
     }
