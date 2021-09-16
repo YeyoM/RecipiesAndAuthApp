@@ -34,6 +34,7 @@ const UserSchema = new Schema({
     },
     stripeSubscriptionId: {
         type: String,
+        default: 'not_subsribed'
     }
 }, {
     timestamps: true

@@ -12,18 +12,20 @@ passport.use('login-normal', new LocalStrategy({
     // Match user's email
     const user = await User.findOne({ email });
     const id = user.id;
-    try {
-        const subs = user.stripeSubscriptionId;
-        const subscription = await stripe.subscriptions.retrieve(subs);
-        const status = subscription.status;
-        console.log(status)
-        if(status != "active"){
-            user.findByIdAndUpdate(id, {suscribed: false})
+    const subs = user.stripeSubscriptionId;
+    if ( subs != 'not_subscribed' ){
+        try {
+            const subscription = await stripe.subscriptions.retrieve(subs);
+            const status = subscription.status;
+            console.log(status)
+            if(status != "active"){
+                user.findByIdAndUpdate(id, {suscribed: false});
+            }
+        } catch (err) {
+            console.log(err);
+            req.flash('error_msg', 'Oops! Something went wrong, try again later');
+            res.redirect('/');
         }
-    } catch (err) {
-        console.log(err);
-        req.flash('error_msg', 'Oops! Something went wrong, try again later');
-        res.redirect('/');
     }
     if (!user) {
         return done(null, false, { message: 'User Not Found'}); //error
