@@ -21,15 +21,13 @@ passport.use('login-normal', new LocalStrategy({
             console.log(status)
             if(status != "active"){
                 try {
-                    await user.findOneAndUpdate(email, {suscribed: false});
+                    await User.findOneAndUpdate(email, {suscribed: false});
                 } catch(err) {
                     console.log(err);
-                    res.redirect('/');  
                 }
             }
         } catch (err) {
             console.log(err);
-            res.redirect('/');
         }
     }
     if (!user) {
