@@ -77,11 +77,9 @@ passport.use('delete-user', new LocalStrategy ({
 }, async (email, password, done) => {
     // Match user's email
     const user = await User.findOne({ email });
-    const userId = user.id;
+    const userId = user._id;
     if (!user) {
         return done(null, false, { message: 'User Not Found'}); //error
-    } else if (!user.confirmed) {
-        return done(null, false, { message: 'Please confirm your account to login' });
     } else {
         // Match user's password
         const match = await user.matchPassword(password);
