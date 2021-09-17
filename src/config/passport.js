@@ -11,8 +11,6 @@ passport.use('login-normal', new LocalStrategy({
 }, async (email, password, done) => {
     // Match user's email
     const user = await User.findOne({ email });
-    console.log(user)
-    const subs = user.stripeSubscriptionId;
     if (!user) {
         return done(null, false, { message: 'User Not Found'}); //error
     } else if (!user.suscribed) {
@@ -24,11 +22,11 @@ passport.use('login-normal', new LocalStrategy({
         const match = await user.matchPassword(password);
         if (match) {
             await Confirm.findOneAndDelete({user: user._id});
+            const subs = user.stripeSubscriptionId;
             if ( subs != 'not_subscribed' ){
                 try {
                     const subscription = await stripe.subscriptions.retrieve(subs);
                     const status = subscription.status;
-                    console.log(status)
                     if(status != "active"){
                         try {
                             await User.findOneAndUpdate(email, {suscribed: false});
