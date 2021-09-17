@@ -95,7 +95,6 @@ passport.use('delete-user', new LocalStrategy ({
                 }
             }
             await User.findByIdAndDelete(userId);
-            req.flash('success_msg', 'Account deleted succesfully');
             return done(null, user);
         } else {
             return done(null, false, { message: 'Incorrect Password'});
