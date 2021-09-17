@@ -26,10 +26,11 @@ passport.use('login-normal', new LocalStrategy({
             if ( subs != 'not_subscribed' ){
                 try {
                     const subscription = await stripe.subscriptions.retrieve(subs);
+                    console.log(subscription)
                     const status = subscription.status;
                     if(status != "active"){
                         try {
-                            await User.findOneAndUpdate(email, {suscribed: false});
+                            await User.findOneAndUpdate(email, {suscribed: false, stripeSubscriptionId: 'not_subscribed', })
                             return done(null, false, { message: 'You need to be suscribed to login'});
                         } catch(err) {
                             console.log(err);
