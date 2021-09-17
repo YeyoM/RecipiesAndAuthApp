@@ -30,7 +30,7 @@ passport.use('login-normal', new LocalStrategy({
                     const status = subscription.status;
                     if(status != "active"){
                         try {
-                            await User.findOneAndUpdate(email, {suscribed: false, stripeSubscriptionId: 'not_subscribed', })
+                            await User.findOneAndUpdate(email, {suscribed: false, stripeSubscriptionId: 'not_subscribed', });
                             return done(null, false, { message: 'You need to be suscribed to login'});
                         } catch(err) {
                             console.log(err);
@@ -55,6 +55,8 @@ passport.use('login-subs', new LocalStrategy({
     const user = await User.findOne({ email });
     if (!user) {
         return done(null, false, { message: 'User Not Found'}); //error
+    } else if (user.suscribed) {
+        return done(null, false, { message: 'Account already suscribed'})
     } else if (!user.confirmed) {
         return done(null, false, { message: 'Please confirm your account to login' });
     } else {
