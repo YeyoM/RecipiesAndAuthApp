@@ -13,7 +13,6 @@ const {
     updateName,
     manageSubscriptionForm,
     postCustomerPortal,
-    cancelSubscription,
     deleteUserForm,
     deleteUser,
     changePasswordLanding,
@@ -65,7 +64,6 @@ router.delete('/users/deleteUser/:id', isAuthenticated, deleteUser);
 //Manage Subscription
 router.get('/users/manageSubscription', isAuthenticated, manageSubscriptionForm);
 router.post('/users/customerPortal', isAuthenticated, postCustomerPortal);
-//router.delete('/users/cancelSubscription/:id', isAuthenticated, cancelSubscription);
 
 //Change user´s password
 router.get('/users/changePasswordLanding', isAuthenticated, changePasswordLanding);

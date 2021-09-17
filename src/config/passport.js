@@ -102,43 +102,6 @@ passport.use('delete-user', new LocalStrategy ({
     } 
 }));
 
-passport.use('cancel-subscription', new LocalStrategy ({
-    usernameField: 'email',
-    passwordField: 'password'
-}, async (email, password, done) => {
-    // Match user's email
-    const user = await User.findOne({ email });
-    const userId = user.id;
-    if (!user) {
-        return done(null, false, { message: 'User Not Found'}); //error
-    } else if (!user.confirmed) {
-        return done(null, false, { message: 'Please confirm your account to login' });
-    } else {
-        // Match user's password
-        const match = await user.matchPassword(password);
-        if (match) {
-            const subscriptionId = user.stripeSubscriptionId;
-            if(subscriptionId != '') {
-                const subscriptionId = user.stripeSubscriptionId;
-                try {
-                    await stripe.subscriptions.del(subscriptionId);
-                    await User.findByIdAndUpdate(req.user.id, {stripeSubscriptionId: '', suscribed: false});
-                    req.logout();
-                    req.flash('success_msg', 'Sucription cancelled succesfully');
-                } catch (err) {
-                    console.log(err);
-                    req.flash('error_msg', 'Sucription wasn´t cancelled, try again later');
-                }
-            }
-            req.logout();
-            return done(null, user);
-        } else {
-            return done(null, false, { message: 'Incorrect Password'});
-        }
-    } 
-}));
-
-
 
 passport.serializeUser(( user, done ) => {
     done(null, user.id);
