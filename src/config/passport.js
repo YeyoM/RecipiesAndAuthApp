@@ -12,7 +12,7 @@ passport.use('login-normal', new LocalStrategy({
     // Match user's email
     const user = await User.findOne({ email });
     if (!user) {
-        return done(null, false, { message: 'User Not Found'}); //error
+        return done(null, false, { message: 'Incorrect username or password'}); //error
     } else if (!user.suscribed) {
         return done(null, false, { message: 'You need to be suscribed to login' });
     } else if (!user.confirmed) {
@@ -41,7 +41,7 @@ passport.use('login-normal', new LocalStrategy({
             }
             return done(null, user);
         } else {
-            return done(null, false, { message: 'Incorrect Password'});
+            return done(null, false, { message: 'Incorrect username or password'});
         }
     } 
 }));
