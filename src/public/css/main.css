@@ -69,7 +69,12 @@ body {
   .dropdown:hover .dropdown-content {
     display: block;
   }
-  
+  .nextPrev {
+    min-width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
   /* Change the background color of the dropdown button when the dropdown content is shown */
 
   .footer-bs {

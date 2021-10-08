@@ -1,13 +1,243 @@
 <div class="card all-page">
-    <div class="card-header">Ingredient: {{ingredient.title}}</div>
-    <div class="card-body">
-        <ul>
-            <li>Type: {{ingredient.tipo}}</li>
-            <li>Calories: {{ingredient.calorias}}mg</li>
-            <li>Carbohydrates: {{ingredient.hdecarbono}}mg</li>
-            <li>Fat: {{ingredient.grasa}}mg</li>
-            <li>Protein: {{ingredient.proteina}}mg</li>
-        </ul>
-        <p>Note: <small>The amounts are represented <em> in mg out of 100g</em>.</small></p>
-    </div>
+  <div class="card-header">Ingredient: {{ingredient.title}} - {{ingredient.ID}}</div>
+  <div class="">
+    <table class="table table-hover">
+      <thead>
+        <tr>
+          <th scope="col">Type</th>
+          <th scope="col">Nut Value</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr class="table-active">
+          <th scope="row">% FORRAJE</th>
+          <td>{{ingredient.FORRAJE_PORC}}</td>
+        </tr>
+        <tr>
+          <th scope="row">DM %</th>
+          <td>{{ingredient.DM_PORC}}</td>
+        </tr>
+        <tr class="table-active">
+          <th scope="row">CP %</th>
+          <td>{{ingredient.CP_PORC}}</td>
+        </tr>
+        <tr>
+          <th scope="row">'SP, %CP</th>
+          <td>{{ingredient.SP_CP_PORC}}</td>
+        </tr>
+        <tr class="table-active">
+          <th scope="row">'ADICP, %CP</th>
+          <td>{{ingredient.ADICP_CP_PORC}}</td>
+        </tr>
+        <tr>
+          <th scope="row">Sugars, %DM</th>
+          <td>{{ingredient.Sugars_DM_PORC}}</td>
+        </tr>
+        <tr class="table-active">
+          <th scope="row">RDP % MS</th>
+          <td>{{ingredient.RDP_PORC_MS}}</td>
+        </tr>
+        <tr>
+          <th scope="row">FAT %</th>
+          <td>{{ingredient.FAT_PORC}}</td>
+        </tr>
+        <tr class="table-active">
+          <th scope="row">ASH %</th>
+          <td>{{ingredient.ASH_PORC}}</td>
+        </tr>
+        <tr>
+          <th scope="row">ST %</th>
+          <td>{{ingredient.ST_PORC}}</td>
+        </tr>
+        <tr class="table-active">
+          <th scope="row">NDF %</th>
+          <td>{{ingredient.NDF_PORC}}</td>
+        </tr>
+        <tr>
+          <th scope="row">ADF %</th>
+          <td>{{ingredient.ADF_PORC}}</td>
+        </tr>
+        <tr class="table-active">
+          <th scope="row">Lignin, %DM</th>
+          <td>{{ingredient.Lignin_DM_PORC}}</td>
+        </tr>
+        <tr>
+          <th scope="row">TDN, %DM</th>
+          <td>{{ingredient.TDN_DM_PORC}}</td>
+        </tr>
+        <tr class="table-active">
+          <th scope="row">ME, Mcal/kg</th>
+          <td>{{ingredient.ME_Mcal_kg}}</td>
+        </tr>
+        <tr>
+          <th scope="row">NEma, Mcal/kg</th>
+          <td>{{ingredient.NEma_Mcal_kg}}</td>
+        </tr>
+        <tr class="table-active">
+          <th scope="row">NEl Mcal/kg</th>
+          <td>{{ingredient.NEl_Mcal_kg}}</td>
+        </tr>
+        <tr>
+          <th scope="row">NEg, Mcal/kg</th>
+          <td>{{ingredient.NEg_Mcal_kg}}</td>
+        </tr>
+        <tr class="table-active">
+          <th scope="row">RUP (%) CP</th>
+          <td>{{ingredient.RUP_CP_PORC}}</td>
+        </tr>
+        <tr>
+          <th scope="row">kd PB, %/h</th>
+          <td>{{ingredient.kd_PB_h_PORC}}</td>
+        </tr>
+        <tr class="table-active">
+          <th scope="row">kd CB1, %/h</th>
+          <td>{{ingredient.kd_CB1_h_PORC}}</td>
+        </tr>
+        <tr>
+          <th scope="row">kd CB2, %/h</th>
+          <td>{{ingredient.kd_CB2_h_PORC}}</td>
+        </tr>
+        <tr class="table-active">
+          <th scope="row">kd CB3, %/h</th>
+          <td>{{ingredient.kd_CB3_h_PORC}}</td>
+        </tr>
+        <tr>
+          <th scope="row">PBID, %</th>
+          <td>{{ingredient.PBID_PORC}}</td>
+        </tr>
+        <tr class="table-active">
+          <th scope="row">CB1ID, %</th>
+          <td>{{ingredient.CB1ID_PORC}}</td>
+        </tr>
+        <tr>
+          <th scope="row">CB2ID, %</th>
+          <td>{{ingredient.CB2ID_PORC}}</td>
+        </tr>
+        <tr class="table-active">
+          <th scope="row">pef, %NDF</th>
+          <td>{{ingredient.pef_NDF_PORC}}</td>
+        </tr>
+        <tr>
+          <th scope="row">ARG, %DM</th>
+          <td>{{ingredient.ARG_DM_PORC}}</td>
+        </tr>
+        <tr class="table-active">
+          <th scope="row">HIS, %DM</th>
+          <td>{{ingredient.HIS_DM_PORC}}</td>
+        </tr>
+        <tr>
+          <th scope="row">ILE, %DM</th>
+          <td>{{ingredient.ILE_DM_PORC}}</td>
+        </tr>
+        <tr class="table-active">
+          <th scope="row">LEU, %DM</th>
+          <td>{{ingredient.LEU_DM_PORC}}</td>
+        </tr>
+        <tr>
+          <th scope="row">LYS, %DM</th>
+          <td>{{ingredient.LYS_DM_PORC}}</td>
+        </tr>
+        <tr class="table-active">
+          <th scope="row">MET, %DM</th>
+          <td>{{ingredient.MET_DM_PORC}}</td>
+        </tr>
+        <tr>
+          <th scope="row">CYS, %DM</th>
+          <td>{{ingredient.CYS_DM_PORC}}</td>
+        </tr>
+        <tr class="table-active">
+          <th scope="row">PHE, %DM</th>
+          <td>{{ingredient.PHE_DM_PORC}}</td>
+        </tr>
+        <tr>
+          <th scope="row">TYR, %DM</th>
+          <td>{{ingredient.TYR_DM_PORC}}</td>
+        </tr>
+        <tr class="table-active">
+          <th scope="row">THR, %DM</th>
+          <td>{{ingredient.THR_DM_PORC}}</td>
+        </tr>
+        <tr>
+          <th scope="row">TRP, %DM</th>
+          <td>{{ingredient.TRP_DM_PORC}}</td>
+        </tr>
+        <tr class="table-active">
+          <th scope="row">VAL, %DM</th>
+          <td>{{ingredient.VAL_DM_PORC}}</td>
+        </tr>
+        <tr>
+          <th scope="row">Ca % DM</th>
+          <td>{{ingredient.Ca_PORC_DM}}</td>
+        </tr>
+        <tr class="table-active">
+          <th scope="row">P % DM</th>
+          <td>{{ingredient.P_PORC_DM}}</td>
+        </tr>
+        <tr>
+          <th scope="row">Mg, % DM</th>
+          <td>{{ingredient.Mg_DM_PORC}}</td>
+        </tr>
+        <tr class="table-active">
+          <th scope="row">Cl, % DM</th>
+          <td>{{ingredient.Cl_DM_PORC}}</td>
+        </tr>
+        <tr>
+          <th scope="row">K, % DM</th>
+          <td>{{ingredient.K_DM_PORC}}</td>
+        </tr>
+        <tr class="table-active">
+          <th scope="row">Na, % DM</th>
+          <td>{{ingredient.Na_DM_PORC}}</td>
+        </tr>
+        <tr>
+          <th scope="row">S, % DM</th>
+          <td>{{ingredient.S_DM_PORC}}</td>
+        </tr>
+        <tr class="table-active">
+          <th scope="row">Co, mg/kg</th>
+          <td>{{ingredient.Co_mg_kg}}</td>
+        </tr>
+        <tr>
+          <th scope="row">Cu, mg/kg</th>
+          <td>{{ingredient.Cu_mg_kg}}</td>
+        </tr>
+        <tr class="table-active">
+          <th scope="row">I, mg/kg</th>
+          <td>{{ingredient.I_mg_kg}}</td>
+        </tr>
+        <tr>
+          <th scope="row">Fe, mg/kg</th>
+          <td>{{ingredient.Fe_mg_kg}}</td>
+        </tr>
+        <tr class="table-active">
+          <th scope="row">Mn, mg/kg</th>
+          <td>{{ingredient.Mn_mg_kg}}</td>
+        </tr>
+        <tr>
+          <th scope="row">Se, mg/kg</th>
+          <td>{{ingredient.Se_mg_kg}}</td>
+        </tr>
+        <tr class="table-active">
+          <th scope="row">Zn, mg/kg</th>
+          <td>{{ingredient.Zn_mg_kg}}</td>
+        </tr>
+        <tr>
+          <th scope="row">Vit A, IU/g</th>
+          <td>{{ingredient.VitA_IU_g}}</td>
+        </tr>
+        <tr class="table-active">
+          <th scope="row">Vit D, IU/g</th>
+          <td>{{ingredient.VitD_IU_g}}</td>
+        </tr>
+        <tr>
+          <th scope="row">Vit E, IU/kg</th>
+          <td>{{ingredient.VitE_IU_kg}}</td>
+        </tr>
+        <tr class="table-active">
+          <th scope="row">Cr, mg/kg</th>
+          <td>{{ingredient.Cr_mg_kg}}</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
 </div>

@@ -10,22 +10,300 @@
       <label for="exampleTextarea" class="form-label mt-4">Ingredient Type</label>
       <input type="text" name="tipo" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter type" value={{ingredient.tipo}} >
     </div>
-    <div class="form-group">
-      <label for="exampleInputEmail1" class="form-label mt-4">Calories</label>
-      <input type="number" name="calorias" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter calories" value={{ingredient.calorias}} step="any" min="0">
     </div>
-    <div class="form-group">
-      <label for="exampleInputEmail1" class="form-label mt-4">Carbohydrates</label>
-      <input type="number" name="hdecarbono" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter carbohydrates" value={{ingredient.hdecarbono}} step="any" min="0">
-    </div>
-    <div class="form-group">
-      <label for="exampleInputEmail1" class="form-label mt-4">Fat</label>
-      <input type="number" name="grasa" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter fat" value={{ingredient.grasa}} step="any" min="0">
-    </div>
-    <div class="form-group">
-      <label for="exampleInputEmail1" class="form-label mt-4">Protein</label>
-      <input type="number" name="proteina" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter Protein" value={{ingredient.proteina}} step="any" min="0">
-    </div>
+  <div class="form-group">
+    <label for="exampleInputEmail1" class="form-label mt-4">% FORRAJE</label>
+    <input type="number" name="FORRAJE_PORC" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp"
+      placeholder="Enter calories" step="any" min="0" value={{ingredient.FORRAJE_PORC}}>
+  </div>
+  <div class="form-group">
+    <label for="exampleInputEmail1" class="form-label mt-4">DM %</label>
+    <input type="number" name="DM_PORC" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp"
+      placeholder="Enter carbohydrates" step="any" min="0" value={{ingredient.DM_PORC}}>
+  </div>
+  <div class="form-group">
+    <label for="exampleInputEmail1" class="form-label mt-4">CP %</label>
+    <input type="number" name="CP_PORC" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp"
+      placeholder="Enter fat" step="any" min="0" value={{ingredient.CP_PORC}}>
+  </div>
+  <div class="form-group">
+    <label for="exampleInputEmail1" class="form-label mt-4">'SP, %CP</label>
+    <input type="number" name="SP_CP_PORC" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp"
+      placeholder="Enter Protein" step="any" min="0" value={{ingredient.SP_CP_PORC}}>
+  </div>
+  <div class="form-group">
+    <label for="exampleInputEmail1" class="form-label mt-4">'ADICP, %CP</label>
+    <input type="number" name="ADICP_CP_PORC" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp"
+      placeholder="Enter Protein" step="any" min="0" value={{ingredient.ADICP_CP_PORC}}>
+  </div>
+  <div class="form-group">
+    <label for="exampleInputEmail1" class="form-label mt-4">Sugars, %DM</label>
+    <input type="number" name="Sugars_DM_PORC" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp"
+      placeholder="Enter Protein" step="any" min="0" value={{ingredient.Sugars_DM_PORC}}>
+  </div>
+  <div class="form-group">
+    <label for="exampleInputEmail1" class="form-label mt-4">RDP % MS</label>
+    <input type="number" name="RDP_PORC_MS" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp"
+      placeholder="Enter Protein" step="any" min="0" value={{ingredient.RDP_PORC_MS}}>
+  </div>
+  <div class="form-group">
+    <label for="exampleInputEmail1" class="form-label mt-4">FAT %</label>
+    <input type="number" name="FAT_PORC" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp"
+      placeholder="Enter Protein" step="any" min="0" value={{ingredient.FAT_PORC}}>
+  </div>
+  <div class="form-group">
+    <label for="exampleInputEmail1" class="form-label mt-4">ASH %</label>
+    <input type="number" name="ASH_PORC" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp"
+      placeholder="Enter Protein" step="any" min="0" value={{ingredient.ASH_PORC}}>
+  </div>
+  <div class="form-group">
+    <label for="exampleInputEmail1" class="form-label mt-4">ST %</label>
+    <input type="number" name="ST_PORC" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp"
+      placeholder="Enter Protein" step="any" min="0" value={{ignredient.ST_PORC}}>
+  </div>
+  <div class="form-group">
+    <label for="exampleInputEmail1" class="form-label mt-4">NDF %</label>
+    <input type="number" name="NDF_PORC" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp"
+      placeholder="Enter Protein" step="any" min="0" value={{ingredient.NDF_PORC}}>
+  </div>
+  <div class="form-group">
+    <label for="exampleInputEmail1" class="form-label mt-4">ADF %</label>
+    <input type="number" name="ADF_PORC" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp"
+      placeholder="Enter Protein" step="any" min="0" value={{ingredient.ADF_PORC}}>
+  </div>
+  <div class="form-group">
+    <label for="exampleInputEmail1" class="form-label mt-4">Lignin, %DM</label>
+    <input type="number" name="Lignin_DM_PORC" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp"
+      placeholder="Enter Protein" step="any" min="0" value={{ingredient.Lignin_DM_PORC}}>
+  </div>
+  <div class="form-group">
+    <label for="exampleInputEmail1" class="form-label mt-4">TDN, %DM</label>
+    <input type="number" name="TDN_DM_PORC" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp"
+      placeholder="Enter Protein" step="any" min="0" value={{ingredient.TDN_DM_PORC}}>
+  </div>
+  <div class="form-group">
+    <label for="exampleInputEmail1" class="form-label mt-4">ME, Mcal/kg</label>
+    <input type="number" name="ME_Mcal_kg" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp"
+      placeholder="Enter Protein" step="any" min="0" value={{ingredient.ME_Mcal_kg}}>
+  </div>
+  <div class="form-group">
+    <label for="exampleInputEmail1" class="form-label mt-4">NEma, Mcal/kg</label>
+    <input type="number" name="NEma_Mcal_kg" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp"
+      placeholder="Enter Protein" step="any" min="0" value={{ingredient.NEma_Mcal_kg}}>
+  </div>
+  <div class="form-group">
+    <label for="exampleInputEmail1" class="form-label mt-4">NEl Mcal/kg</label>
+    <input type="number" name="NEl_Mcal_kg" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp"
+      placeholder="Enter Protein" step="any" min="0" value={{ingredient.NEl_Mcal_kg}}>
+  </div>
+  <div class="form-group">
+    <label for="exampleInputEmail1" class="form-label mt-4">NEg, Mcal/kg</label>
+    <input type="number" name="NEg_Mcal_kg" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp"
+      placeholder="Enter Protein" step="any" min="0" value={{ingredient.NEg_Mcal_kg}}>
+  </div>
+  <div class="form-group">
+    <label for="exampleInputEmail1" class="form-label mt-4">RUP (%) CP</label>
+    <input type="number" name="RUP_CP_PORC" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp"
+      placeholder="Enter Protein" step="any" min="0" value={{ingredient.RUP_CP_PORC}}>
+  </div>
+  <div class="form-group">
+    <label for="exampleInputEmail1" class="form-label mt-4">kd PB, %/h</label>
+    <input type="number" name="kd_PB_h_PORC" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp"
+      placeholder="Enter Protein" step="any" min="0" value={{ingredient.kd_PB_h_PORC}}>
+  </div>
+  <div class="form-group">
+    <label for="exampleInputEmail1" class="form-label mt-4">kd CB1, %/h</label>
+    <input type="number" name="kd_CB1_h_PORC" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp"
+      placeholder="Enter Protein" step="any" min="0" value={{ingredient.kd_CB1_h_PORC}}>
+  </div>
+  <div class="form-group">
+    <label for="exampleInputEmail1" class="form-label mt-4">kd CB2, %/h</label>
+    <input type="number" name="kd_CB2_h_PORC" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp"
+      placeholder="Enter Protein" step="any" min="0" value={{ingredient.kd_CB2_h_PORC}}>
+  </div>
+  <div class="form-group">
+    <label for="exampleInputEmail1" class="form-label mt-4">kd CB3, %/h</label>
+    <input type="number" name="kd_CB3_h_PORC" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp"
+      placeholder="Enter Protein" step="any" min="0" value={{ingredient.kd_CB3_h_PORC}}>
+  </div>
+  <div class="form-group">
+    <label for="exampleInputEmail1" class="form-label mt-4">PBID, %</label>
+    <input type="number" name="PBID_PORC" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp"
+      placeholder="Enter Protein" step="any" min="0" value={{ingredient.PBID_PORC}}>
+  </div>
+  <div class="form-group">
+    <label for="exampleInputEmail1" class="form-label mt-4">CB1ID, %</label>
+    <input type="number" name="CB1ID_PORC" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp"
+      placeholder="Enter Protein" step="any" min="0" value={{ingredient.CB1ID_PORC}}>
+  </div>
+  <div class="form-group">
+    <label for="exampleInputEmail1" class="form-label mt-4">CB2ID, %</label>
+    <input type="number" name="CB2ID_PORC" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp"
+      placeholder="Enter Protein" step="any" min="0" value={{ingredient.CB2ID_PORC}}>
+  </div>
+  <div class="form-group">
+    <label for="exampleInputEmail1" class="form-label mt-4">pef, %NDF</label>
+    <input type="number" name="pef_NDF_PORC" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp"
+      placeholder="Enter Protein" step="any" min="0" value={{ingredient.pef_NDF_PORC}}>
+  </div>
+  <div class="form-group">
+    <label for="exampleInputEmail1" class="form-label mt-4">ARG, %DM</label>
+    <input type="number" name="ARG_DM_PORC" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp"
+      placeholder="Enter Protein" step="any" min="0" value={{ingredient.ARG_DM_PORC}}>
+  </div>
+  <div class="form-group">
+    <label for="exampleInputEmail1" class="form-label mt-4">HIS, %DM</label>
+    <input type="number" name="HIS_DM_PORC" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp"
+      placeholder="Enter Protein" step="any" min="0" value={{ingredient.HIS_DM_PORC}}>
+  </div>
+  <div class="form-group">
+    <label for="exampleInputEmail1" class="form-label mt-4">ILE, %DM</label>
+    <input type="number" name="ILE_DM_PORC" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp"
+      placeholder="Enter Protein" step="any" min="0" value={{ingredient.ILE_DM_PORC}}>
+  </div>
+  <div class="form-group">
+    <label for="exampleInputEmail1" class="form-label mt-4">LEU, %DM</label>
+    <input type="number" name="LEU_DM_PORC" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp"
+      placeholder="Enter Protein" step="any" min="0" value={{ingredient.LEU_DM_PORC}}>
+  </div>
+  <div class="form-group">
+    <label for="exampleInputEmail1" class="form-label mt-4">LYS, %DM</label>
+    <input type="number" name="LYS_DM_PORC" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp"
+      placeholder="Enter Protein" step="any" min="0" value={{ingredient.LYS_DM_PORC}}>
+  </div>
+  <div class="form-group">
+    <label for="exampleInputEmail1" class="form-label mt-4">MET, %DM</label>
+    <input type="number" name="MET_DM_PORC" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp"
+      placeholder="Enter Protein" step="any" min="0" value={{ingredient.MET_DM_PORC}}>
+  </div>
+  <div class="form-group">
+    <label for="exampleInputEmail1" class="form-label mt-4">CYS, %DM</label>
+    <input type="number" name="CYS_DM_PORC" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp"
+      placeholder="Enter Protein" step="any" min="0" value={{ingredient.CYS_DM_PORC}}>
+  </div>
+  <div class="form-group">
+    <label for="exampleInputEmail1" class="form-label mt-4">PHE, %DM</label>
+    <input type="number" name="PHE_DM_PORC" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp"
+      placeholder="Enter Protein" step="any" min="0" value={{ingredient.PHE_DM_PORC}}>
+  </div>
+  <div class="form-group">
+    <label for="exampleInputEmail1" class="form-label mt-4">TYR, %DM</label>
+    <input type="number" name="TYR_DM_PORC" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp"
+      placeholder="Enter Protein" step="any" min="0" value={{ingredient.TYR_DM_PORC}}>
+  </div>
+  <div class="form-group">
+    <label for="exampleInputEmail1" class="form-label mt-4">THR, %DM</label>
+    <input type="number" name="THR_DM_PORC" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp"
+      placeholder="Enter Protein" step="any" min="0" value={{ingredient.THR_DM_PORC}}>
+  </div>
+  <div class="form-group">
+    <label for="exampleInputEmail1" class="form-label mt-4">TRP, %DM</label>
+    <input type="number" name="TRP_DM_PORC" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp"
+      placeholder="Enter Protein" step="any" min="0" value={{ingredient.TRP_DM_PORC}}>
+  </div>
+  <div class="form-group">
+    <label for="exampleInputEmail1" class="form-label mt-4">VAL, %DM</label>
+    <input type="number" name="VAL_DM_PORC" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp"
+      placeholder="Enter Protein" step="any" min="0" value={{ingredient.VAL_DM_PORC}}>
+  </div>
+  <div class="form-group">
+    <label for="exampleInputEmail1" class="form-label mt-4">Ca % DM</label>
+    <input type="number" name="Ca_PORC_DM" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp"
+      placeholder="Enter Protein" step="any" min="0" value={{ingredient.Ca_PORC_DM}}>
+  </div>
+  <div class="form-group">
+    <label for="exampleInputEmail1" class="form-label mt-4">P % DM</label>
+    <input type="number" name="P_PORC_DM" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp"
+      placeholder="Enter Protein" step="any" min="0" value={{ingredient.P_PORC_DM}}>
+  </div>
+  <div class="form-group">
+    <label for="exampleInputEmail1" class="form-label mt-4">Mg, % DM</label>
+    <input type="number" name="Mg_DM_PORC" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp"
+      placeholder="Enter Protein" step="any" min="0" value={{ingredient.Mg_DM_PORC}}>
+  </div>
+  <div class="form-group">
+    <label for="exampleInputEmail1" class="form-label mt-4">Cl, % DM</label>
+    <input type="number" name="Cl_DM_PORC" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp"
+      placeholder="Enter Protein" step="any" min="0" value={{ingredient.Cl_DM_PORC}}>
+  </div>
+  <div class="form-group">
+    <label for="exampleInputEmail1" class="form-label mt-4">K, % DM</label>
+    <input type="number" name="K_DM_PORC" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp"
+      placeholder="Enter Protein" step="any" min="0" value={{ingredient.K_DM_PORC}}>
+  </div>
+  <div class="form-group">
+    <label for="exampleInputEmail1" class="form-label mt-4">Na, % DM</label>
+    <input type="number" name="Na_DM_PORC" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp"
+      placeholder="Enter Protein" step="any" min="0" value={{ingredient.Na_DM_PORC}}>
+  </div>
+  <div class="form-group">
+    <label for="exampleInputEmail1" class="form-label mt-4">S, % DM</label>
+    <input type="number" name="S_DM_PORC" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp"
+      placeholder="Enter Protein" step="any" min="0" value={{ingredient.S_DM_PORC}}>
+  </div>
+  <div class="form-group">
+    <label for="exampleInputEmail1" class="form-label mt-4">Co, mg/kg</label>
+    <input type="number" name="Co_mg_kg" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp"
+      placeholder="Enter Protein" step="any" min="0" value={{ingredient.Co_mg_kg}}>
+  </div>
+  <div class="form-group">
+    <label for="exampleInputEmail1" class="form-label mt-4">Cu, mg/kg</label>
+    <input type="number" name="Cu_mg_kg" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp"
+      placeholder="Enter Protein" step="any" min="0" value={{ingredient.Cu_mg_kg}}>
+  </div>
+  <div class="form-group">
+    <label for="exampleInputEmail1" class="form-label mt-4">I, mg/kg</label>
+    <input type="number" name="I_mg_kg" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp"
+      placeholder="Enter Protein" step="any" min="0" value={{ingredient.I_mg_kg}}>
+  </div>
+  <div class="form-group">
+    <label for="exampleInputEmail1" class="form-label mt-4">Fe, mg/kg</label>
+    <input type="number" name="Fe_mg_kg" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp"
+      placeholder="Enter Protein" step="any" min="0" value={{ingredient.Fe_mg_kg}}>
+  </div>
+  <div class="form-group">
+    <label for="exampleInputEmail1" class="form-label mt-4">Mn, mg/kg</label>
+    <input type="number" name="Mn_mg_kg" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp"
+      placeholder="Enter Protein" step="any" min="0" value={{ingredient.Mn_mg_kg}}>
+  </div>
+  <div class="form-group">
+    <label for="exampleInputEmail1" class="form-label mt-4">Se, mg/kg</label>
+    <input type="number" name="Se_mg_kg" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp"
+      placeholder="Enter Protein" step="any" min="0" value={{ingredient.Se_mg_kg}}>
+  </div>
+  <div class="form-group">
+    <label for="exampleInputEmail1" class="form-label mt-4">Zn, mg/kg</label>
+    <input type="number" name="Zn_mg_kg" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp"
+      placeholder="Enter Protein" step="any" min="0" value={{ingredient.Zn_mg_kg}}>
+  </div>
+  <div class="form-group">
+    <label for="exampleInputEmail1" class="form-label mt-4">Vit A, IU/g</label>
+    <input type="number" name="VitA_IU_g" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp"
+      placeholder="Enter Protein" step="any" min="0" value={{ingredient.VitA_IU_g}}>
+  </div>
+  <div class="form-group">
+    <label for="exampleInputEmail1" class="form-label mt-4">Vit D, IU/g</label>
+    <input type="number" name="VitD_IU_g" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp"
+      placeholder="Enter Protein" step="any" min="0" value={{ingredient.VitD_IU_g}}>
+  </div>
+  <div class="form-group">
+    <label for="exampleInputEmail1" class="form-label mt-4">Vit E, IU/kg</label>
+    <input type="number" name="VitE_IU_kg" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp"
+      placeholder="Enter Protein" step="any" min="0" value={{ingredient.VitE_IU_kg}}>
+  </div>
+  <div class="form-group">
+    <label for="exampleInputEmail1" class="form-label mt-4">Cr, mg/kg</label>
+    <input type="number" name="Cr_mg_kg" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp"
+      placeholder="Enter Protein" step="any" min="0" value={{ingredient.Cr_mg_kg}}>
+  </div>
+  <!--<label class="form-check-label">
+    <input type="radio" class="form-check-input" name="PUBLIC" id="optionsRadios1" value="true" checked="true">
+    Public (Visible for all users)
+  </label>
+  <label class="form-check-label">
+    <input type="radio" class="form-check-input" name="PUBLIC" id="optionsRadios1" value="false" checked='false'>
+    Private (Only visible for you)
+  </label>-->
     <div class="form-group">
         <button type="number" class="btn btn-primary mt-3">Submit</button>
     </div>

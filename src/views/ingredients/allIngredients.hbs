@@ -1,13 +1,33 @@
 <div>
   <h1>All my ingredients</h1>
   <p>Note: <small>To view the content of each ingredient tap on the ingredient's name</small></p>
-  {{#each ingredients}}
-  <div class="card bg-secondary mb-3" style="max-width: 18rem;">
-    <div class="card-header">Ingredient</div>
+  {{#if isFirst}}
+  <div class="nextPrev mt-4" >
+    <a href="/ingredients/{{nextPage}}">NextPage</a>
+  </div>
+  {{/if}}
+  {{#if isLast}}
+  <div class="nextPrev mt-4" >
+    <a href="/ingredients/{{prevPage}}">PreviousPage</a>
+  </div>
+  {{/if}}
+  {{#if isMiddle}}
+  <div class="nextPrev mt-4" >
+    <a href="/ingredients/{{prevPage}}" >PreviousPage</a>
+    <span style="width: 1rem"></span>
+    <a href="/ingredients/{{nextPage}}" >NextPage</a>
+  </div>
+  {{/if}}
+  {{#each ingredientspage}}
+  <div class="card bg-secondary mb-3" style="max-width: 16rem; min-width: 16rem; min-height: 16rem; max-height: 16rem;">
+    <div class="card-header">Ingredient - {{ID}}</div>
     <div class="card-body">
       <h4 class="card-title">
         <a href="/ingredient/{{_id}}">{{title}}</a>
       </h4>
+      {{#if PUBLIC}}
+      <p><small>You dont have permission to delete or change this ingredient</small></p>
+      {{else}}
       <a href="/ingredients/edit/{{_id}}">
         <button type="button" class="btn btn-outline-primary">
           Update
@@ -19,6 +39,7 @@
           Delete
         </button>
       </form>
+      {{/if}}
     </div>
   </div>
   {{else}}
@@ -27,4 +48,21 @@
     We have not found any ingredients, start adding them <a href="/ingredients/add">here</a>.
   </p>
   {{/each }}
+  {{#if isFirst}}
+  <div class="nextPrev mt-4" >
+    <a href="/ingredients/{{nextPage}}">NextPage</a>
+  </div>
+  {{/if}}
+  {{#if isLast}}
+  <div class="nextPrev mt-4" >
+    <a href="/ingredients/{{prevPage}}">PreviousPage</a>
+  </div>
+  {{/if}}
+  {{#if isMiddle}}
+  <div class="nextPrev mt-4" >
+    <a href="/ingredients/{{prevPage}}" >PreviousPage</a>
+    <span style="width: 1rem"></span>
+    <a href="/ingredients/{{nextPage}}" >NextPage</a>
+  </div>
+  {{/if}}
 </div>
