@@ -83,6 +83,8 @@ recipesCtrl.renderRecipes = async (req, res) => {
     }
 };
 
+//! corregir esta funcion
+
 recipesCtrl.renderRecipe = async (req, res) => {
     try {
         const recipe = await Recipe.findById(req.params.id).lean();
