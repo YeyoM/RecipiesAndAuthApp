@@ -6,6 +6,7 @@ const methodOverride    = require('method-override');
 const flash             = require('connect-flash');
 const session           = require('express-session');
 const passport          = require('passport');
+const MemoryStore       = require('memorystore')(session);
 
 
 //////////////////////////////// INITIALIZER
@@ -32,8 +33,12 @@ app.use(methodOverride('_method'));
 app.use(session({
     cookie:{
         secure: true,
+        maxAge: 86400000
     },
-    secret: 'secret',
+    store: new MemoryStore({
+        checkPeriod: 86400000 // prune expired entries every 24h
+    }),
+    secret: process.env.PRODUCTION_SECRET,
     resave: false,
     saveUninitialized: true
 }));
