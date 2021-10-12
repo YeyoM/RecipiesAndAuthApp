@@ -104,7 +104,7 @@ usersCtrl.renderSignInForm = (req, res) => {
 };
 usersCtrl.signIn = passport.authenticate('login-normal', {
     failureRedirect: '/users/signin',
-    successRedirect: '/ingredients',
+    successRedirect: '/ingredients/1',
     failureFlash: true
 });
 
@@ -275,7 +275,7 @@ usersCtrl.updatePassword = async (req, res) => {
         } catch (err) {
             console.log(err);
             req.flash('error_msg', 'Please fill in the form correctly');
-            res.redirect('/ingredients/add');
+            res.redirect('/');
         }
     }
 };

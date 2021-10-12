@@ -26,7 +26,6 @@ passport.use('login-normal', new LocalStrategy({
             if ( subs != 'not_subscribed' ){
                 try {
                     const subscription = await stripe.subscriptions.retrieve(subs);
-                    console.log(subscription)
                     const status = subscription.status;
                     if(status != "active"){
                         try {
