@@ -39,7 +39,7 @@ recipesCtrl.selectIngredients = async (req, res) => {
 recipesCtrl.continueRecipe = async (req, res) => {
     try{
         const recipe = await Recipe.findById(req.params.id);
-        if( ingredient.user != req.user.id ) {
+        if( recipe.user != req.user.id ) {
             req.flash('error_msg', 'Oops! you are not authorized to access here');
             return res.redirect('/ingredients');
         } else {
