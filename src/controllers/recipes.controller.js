@@ -88,32 +88,21 @@ recipesCtrl.renderRecipes = async (req, res) => {
 recipesCtrl.renderRecipe = async (req, res) => {
     try {
         const recipe = await Recipe.findById(req.params.id).lean();
-        const ingredients = await Ingredient.find({user: req.user.id}).sort({createdAt: 'desc'}).lean();
-        const newRecipe = new Array(recipe);
-        for (let i = 0; i < ingredients.length; i++) {
-            ingredients[i].amount = newRecipe[0].ingredientsAmounts[i];
-        }
-        for (let i = 0; i < ingredients.length; i++) {
-            if(ingredients[i].amount === undefined) {
-                ingredients.splice([i], [i]);
+        if( recipe.user != req.user.id ) {
+            req.flash('error_msg', 'Oops! you are not authorized to access here');
+            return res.redirect('/recipes');
+        } else {
+            const ingredientsInRecipe = [ ...recipe.ingredientsId ];
+            const ingredients = [];
+            for (let i = 0; i < ingredientsInRecipe.length; i++) {
+                ingredients[i] = await Ingredient.findById(ingredientsInRecipe[i]);
             }
+            console.log(ingredients);
+            res.render('recipes/editRecipe', {recipe, ingredients});
         }
-        const totals = { ...ingredients[0] };
-        totals.calorias = 0;
-        totals.hdecarbono = 0;
-        totals.grasa = 0;
-        totals.proteina = 0;
-        for (let i = 0; i < ingredients.length; i++) {
-            totals.calorias += (ingredients[i].calorias * ingredients[i].amount) / 100;
-            totals.hdecarbono += (ingredients[i].hdecarbono * ingredients[i].amount) / 100;
-            totals.grasa += (ingredients[i].grasa * ingredients[i].amount) / 100;
-            totals.proteina += (ingredients[i].proteina * ingredients[i].amount) / 100;
-        }
-        res.render('recipes/recipe', { ingredients, totals })
     } catch (err) {
-        console.log(err);
-        req.flash('error_msg', 'Oops! Something went wrong, try again later');
         res.redirect('/');
+        req.flash('error_msg', 'Oops something went wrong, try again later');
     }
 };
 
@@ -146,20 +135,21 @@ recipesCtrl.renderEditForm = async (req, res) => {
 recipesCtrl.updateRecipe = async (req, res) => {
     const { title, 
         ingredientsId
-} = req.body;
-try {
-    await Recipe.findByIdAndUpdate(req.params.id, { 
-        title,
-        ingredientsId
-    }).lean();
-    req.flash('success_msg', 'Please continue updating your recipe');
-    res.redirect(`/recipes/editContinue/${req.params.id}`);
-} catch(err) {
-    console.log(err)
-    req.flash('error_msg', 'Please fill in the form correctly');
-    res.redirect('/recipes/add');
-}
+    } = req.body;
+    try {
+        await Recipe.findByIdAndUpdate(req.params.id, { 
+            title,
+            ingredientsId
+        }).lean();
+        req.flash('success_msg', 'Please continue updating your recipe');
+        res.redirect(`/recipes/editContinue/${req.params.id}`);
+    } catch(err) {
+        console.log(err)
+        req.flash('error_msg', 'Please fill in the form correctly');
+        res.redirect('/recipes/add');
+    }
 };
+
 recipesCtrl.continueUpdateRecipeForm = async (req, res) => {
     try{
         const recipe = await Recipe.findById(req.params.id);
