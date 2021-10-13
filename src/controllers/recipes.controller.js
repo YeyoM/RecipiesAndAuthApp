@@ -159,6 +159,7 @@ recipesCtrl.renderRecipe = async (req, res) => {
                 ingredientsobj.VitE_IU_kg += ingredients[i].VitE_IU_kg
                 ingredientsobj.Cr_mg_kg += ingredients[i].Cr_mg_kg
             }
+            console.log(ingredientsobj);
                 ingredientsobj.FORRAJE_PORC = ingredientsobj.FORRAJE_PORC / ingredients.length;
                 ingredientsobj.DM_PORC = ingredientsobj.DM_PORC / ingredients.length;
                 ingredientsobj.CP_PORC = ingredientsobj.CP_PORC / ingredients.length;
