@@ -1,7 +1,136 @@
 const recipesCtrl       = {};
 const Recipe            = require('../models/Recipe');
 const Ingredient        = require('../models/Ingredient');
+const Animal            = require('../models/Animal');
 
+/////////////////////////////////////////////////
+// empezar desde cero
+// el usuuario tiene que elegir entre animal de engorda o lechero
+// tenemos que renderizar una pagina con dos botones y de ahi seguir caminos separados
+recipesCtrl.selectAnimal = (req, res) => {
+    res.render('recipes/selectAnimal');
+}
+// capturamos datos del animal lechero
+recipesCtrl.lechAnimalForm = (req, res) => {
+    res.render('recipes/lechAnimalForm');
+}
+recipesCtrl.lechAnimalPost = async (req, res) => {
+    const { tipoAnimal, 
+            edadMeses, 
+            pesoVivo, 
+            prodLeche, 
+            prodObjetivoLeche, 
+            distOrde, 
+            loteProd, 
+            noLactancia
+        } = req.body;
+    const newAnimal = new Animal({
+        tipoAnimal, 
+        edadMeses, 
+        pesoVivo, 
+        prodLeche, 
+        prodObjetivoLeche, 
+        distOrde, 
+        loteProd, 
+        noLactancia
+    })
+    // hacer el chequeo para ver si es animal confinado, la dist en metros tiene que ser 0
+    if (newAnimal.tipoAnimal == "Confinado") {
+        newAnimal.distOrde = 0;
+    }
+    // a;adir el user.id
+    newAnimal.user = req.user.id;
+    newAnimal.tipoGanado = "Lechero";
+    try {
+        await newAnimal.save();
+        req.flash('success_msg', 'Guardado correctamente, por favor continue');
+        res.redirect(`/recipes/new-recipe/${newAnimal._id}`);
+    } catch(err) {
+        console.log(err);
+    }
+}
+// capturamos datos del animal de engorda
+recipesCtrl.engAnimalForm = (req, res) => {
+    res.render('recipes/engAnimalForm');
+}
+recipesCtrl.engAnimalPost = async (req, res) => {
+    const { tipoAnimal, 
+        edadMeses, 
+        pesoVivo, 
+        distOrde, 
+        raza,
+        prodObjetivoEngo
+    } = req.body;
+    const newAnimal = new Animal({
+        tipoAnimal, 
+        edadMeses, 
+        pesoVivo, 
+        distOrde, 
+        raza,
+        prodObjetivoEngo
+    })
+    // hacer el chequeo para ver si es animal confinado, la dist en metros tiene que ser 0
+    if (newAnimal.tipoAnimal == "Confinado") {
+        newAnimal.distOrde = 0;
+    }
+    // a;adir el user.id
+    newAnimal.user = req.user.id;
+    newAnimal.tipoGanado = "Engorda";
+    try {
+        await newAnimal.save();
+        req.flash('success_msg', 'Guardado correctamente, por favor continue');
+        res.redirect(`/recipes/new-recipe/${newAnimal._id}`);
+    } catch(err) {
+        console.log(err);
+    }
+}
+// lo que seguiría es escoger los ingredientes 
+recipesCtrl.selectIngredientsForm = async (req, res) => {
+    const animalId = req.params.id;
+    console.log(animalId);
+    const publicingredients = await Ingredient.find({PUBLIC: true}).lean();
+    const privateIngredients = await Ingredient.find({USER: req.user.id}).lean();
+    const ingredients = publicingredients.concat(privateIngredients);
+    res.render('recipes/newRecipe', { animalId, ingredients });
+}
+recipesCtrl.selectIngredientsPost = async (req, res) => {
+    const { title, 
+        ingredientsId
+    }   = req.body;
+    const newRecipe = new Recipe({ 
+        title, 
+        ingredientsId 
+    });
+    newRecipe.user = req.user.id;
+    const animalId = req.params.id;
+    newRecipe.animal = animalId;
+    try {
+        await newRecipe.save();
+        req.flash('success_msg', 'Recipe Added Successfully');
+        res.redirect(`/recipes`);
+    } catch (err) {
+        console.log(err)
+        req.flash('error_msg', 'Please fill in the form correctly');
+        res.redirect('/recipes');
+    }   
+}
+// ingresar materia seca, proteina y pc
+recipesCtrl.datosAdicionalesForm = async (req, res) => {
+
+}
+recipesCtrl.datosAdicionalesPost = async (req, res) => {
+    
+}
+
+
+
+
+
+
+
+
+
+/////////////////////////////////////////////////
 
 recipesCtrl.renderRecipeForm = async (req, res) => {
     try {

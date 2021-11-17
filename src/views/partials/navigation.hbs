@@ -1,39 +1,39 @@
-<ul class="nav nav-pills">
+<ul class="nav nav-pills nav">
   <li class="nav-item">
-    <a class="nav-link active" href="/">AuthApp</a>
+    <a class="nav-link active" href="/">App</a>
   </li>
   {{#if user}}
   <li class="nav-item dropdown">
-    <a class="nav-link dropdown-toggle dropbtn" data-bs-toggle="dropdown" href="/ingredients/1" role="button" aria-haspopup="true" aria-expanded="false">Ingredients</a>
+    <a class="nav-link dropdown-toggle dropbtn" data-bs-toggle="dropdown" href="/ingredients/1" role="button" aria-haspopup="true" aria-expanded="false">Ingredientes</a>
     <div class="dropdown-content">
-      <a class="dropdown-item" href="/ingredients/1">All ingredients</a>
-      <a class="dropdown-item" href="/ingredients/add">Add a Ingredient</a>
+      <a class="dropdown-item" href="/ingredients/1">Todos los ingredientes</a>
+      <a class="dropdown-item" href="/ingredients/add">Añadir un ingrediente</a>
       <div class="dropdown-divider"></div>
     </div>
   </li>
   <li class="nav-item dropdown">
-    <a class="nav-link dropdown-toggle dropbtn" data-bs-toggle="dropdown" href="/recipes" role="button" aria-haspopup="true" aria-expanded="false">Recipes</a>
+    <a class="nav-link dropdown-toggle dropbtn" data-bs-toggle="dropdown" href="/recipes" role="button" aria-haspopup="true" aria-expanded="false">Dietas</a>
     <div class="dropdown-content">
-      <a class="dropdown-item" href="/recipes">All Recipes</a>
-      <a class="dropdown-item" href="/recipes/add">Add a Recipe</a>
+      <a class="dropdown-item" href="/recipes">Mis Dietas</a>
+      <a class="dropdown-item" href="/recipes/add">Añadir una Dieta</a>
       <div class="dropdown-divider"></div>
     </div>
   </li>
   <li class="nav-item dropdown">
-    <a class="nav-link dropdown-toggle dropbtn" data-bs-toggle="dropdown" href="#" role="button" aria-haspop="true" aria-expanded="false">My account</a>
+    <a class="nav-link dropdown-toggle dropbtn" data-bs-toggle="dropdown" href="#" role="button" aria-haspop="true" aria-expanded="false">Mi cuenta</a>
     <div class="dropdown-content">
-      <a class="dropdown-item" href="/users/updateName">Edit your account</a>
-      <a class="dropdown-item" href="/users/changePasswordLanding">Change your password</a>
-      <a class="dropdown-item" href="/users/deleteUser">Delete my account</a>
-      <a class="dropdown-item" href="/users/logout">Log Out</a>
+      <a class="dropdown-item" href="/users/updateName">Editar mi cuenta</a>
+      <a class="dropdown-item" href="/users/changePasswordLanding">Cambiar contraseña</a>
+      <a class="dropdown-item" href="/users/deleteUser">Eliminar mi cuenta</a>
+      <a class="dropdown-item" href="/users/logout">Salir</a>
     </div>
   </li>
   {{else}}
   <li class="nav-item ml-auto">
-    <a class="nav-link" href="/users/signin">Login</a>
+    <a class="nav-link" href="/users/signin">Ingresa</a>
   </li>
   <li class="nav-item">
-    <a class="nav-link" href="/users/signup">Register</a>
+    <a class="nav-link" href="/users/signup">Nueva Cuenta</a>
   </li>
   {{/if}}
 </ul>

@@ -1,0 +1,48 @@
+<div class="animal-form">
+    <form action="/recipes/add/ganadoengorda" method="POST">
+        <legend>Ingrese la información que se solicita</legend>
+        <div class="form-group">
+            <label for="exampleSelect1" class="form-label mt-2 white">Tipo de Animal</label>
+            <select class="form-select" id="exampleSelect1" name="tipoAnimal">
+                <option value="Pastoreo">Pastoreo</option>
+                <option value="Confinado">Confinado</option>
+            </select>
+        </div>
+        <div class="form-group">
+            <label for="exampleInputEmail1" class="form-label mt-2">Edad (en meses)</label>
+            <input type="number" name="edadMeses" class="form-control" id="exampleInputEmail1"
+                aria-describedby="emailHelp" placeholder="Edad" step="any" min="0">
+        </div>
+        <div class="form-group">
+            <label for="exampleInputEmail1" class="form-label mt-2">Peso (en kg)</label>
+            <input type="number" name="pesoVivo" class="form-control" id="exampleInputEmail1"
+                aria-describedby="emailHelp" placeholder="Peso" step="any" min="0">
+        </div>
+        <div class="form-group">
+            <label for="exampleInputEmail1" class="form-label mt-2">Distancia a la Ordeña (en mts)</label>
+            <input type="number" name="distOrde" class="form-control" id="exampleInputEmail1"
+                aria-describedby="emailHelp" placeholder="Distancia en metros" step="any" min="0">
+        </div>
+        <div class="form-group">
+            <label for="exampleSelect1" class="form-label mt-2 white">Raza del Animal</label>
+            <select class="form-select" id="exampleSelect1" name="raza">
+                <option value="Europeo">Europeo</option>
+                <option value="Indico">Indico</option>
+                <option value="Mixta">Mixta</option>
+            </select>
+        </div>
+        <div class="form-group">
+            <label for="exampleSelect1" class="form-label mt-2 white">Raza del Animal</label>
+            <select class="form-select" id="exampleSelect1" name="prodObjetivoEngo">
+                <option value="Creep Feeding">Creep Feeding (Lactancia)</option>
+                <option value="Desarrollo">Desarrollo (150-250kg)</option>
+                <option value="Crecimiento">Crecimiento (250-350kg)</option>
+                <option value="Engorda">Engorda (350-450kg)</option>
+                <option value="Finalizacion">Finalizacion (450kg-Mercado)</option>
+            </select>
+        </div>
+        <div class="d-grid gap-2">
+            <button class="btn btn-lg btn-primary signlog">Continuar!</button>
+        </div>
+    </form>
+</div>

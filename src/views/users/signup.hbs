@@ -1,27 +1,63 @@
-<form action="/users/signup" method="POST">
-    <legend>Register a new account</legend>
-    <div class="form-group">
-        <label class="form-label mt-4"></label>
-        <div class="form-floating mb-3">
-            <input type="text" class="form-control" id="floatingInput" placeholder="Diego Moreno" name="name" value="{{name}}">
-            <label for="floatingInput">Name</label>
+<div class="signup-container">
+    <form action="/users/signup" method="POST">
+        <legend class="signup-legend mb-4">Crea una cuenta</legend>
+        <div class="form-group mt-4">
+            <div class="form-floating mb-3">
+                <input type="text" class="form-control" id="floatingInput" placeholder="Diego Moreno" name="name"
+                    value="{{name}}">
+                <label for="floatingInput">Nombre</label>
+            </div>
+            <div class="form-floating mb-3">
+                <input type="email" class="form-control" id="floatingInput" placeholder="name@example.com" name="email"
+                    value="{{email}}">
+                <label for="floatingInput">Correo electrónico</label>
+            </div>
+            <div class="form-floating mb-0">
+                <input type="number" class="form-control" id="floatingInput" placeholder="3453210000" name="phone"
+                    value="{{phone}}">
+                <label for="floatingInput">Número Telefónico</label>
+            </div>
+            <div class="form-group mt-0">
+                <label for="exampleSelect1" class="form-label mt-2 white">Ocupación</label>
+                <select class="form-select" id="exampleSelect1" name="ocupation">
+                    <option value="Asesor Técnico">Asesor Técnico</option>
+                    <option value="Médico Veterinario">Médico Veterinario</option>
+                    <option value="Consultor Privado">Consultor Privado</option>
+                    <option value="Industria Nutrición">Industria Nutrición</option>
+                    <option value="Comercializador">Comercializador</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label for="exampleSelect1" class="form-label mt-2 white">Especie de Interés</label>
+                <select class="form-select" id="exampleSelect1" name="species">
+                    <option value="Ganado Lechero">Ganado Lechero</option>
+                    <option value="Ganado de Engorda">Ganado de Engorda</option>
+                    <option value="Ovinos Caprinos">Ovinos/Caprinos</option>
+                    <option value="Cerdos">Cerdos</option>
+                    <option value="Aves">Aves</option>
+                    <option value="Otros">Otros</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label class="form-label mt-3 mb-0 white">Contraseña</label>
+                <div class="form-floating">
+                    <input type="password" class="form-control" id="floatingPassword" placeholder="Password"
+                        name="password">
+                    <label for="floatingPassword">Contraseña</label>
+                </div>
+                <div class="form-floating">
+                    <input type="password" class="form-control" id="floatingPassword" placeholder="Password"
+                        name="confirm_password">
+                    <label for="floatingPassword">Confirma tu contraseña</label>
+                </div>
+                <p class="signup-small"><small>La contraseña debe ser <em>al menos 7 caracteres de
+                            longitud</em>.</small>
+                </p>
+            </div>
+
+            <div class="d-grid gap-2">
+                <button class="btn btn-lg btn-primary signlog">Crear!</button>
+            </div>
         </div>
-        <div class="form-floating mb-3">
-            <input type="email" class="form-control" id="floatingInput" placeholder="name@example.com" name="email" value="{{email}}">
-            <label for="floatingInput">Email address</label>
-        </div>
-        <p><small>The email must be <em>a valid email, and it will be the same when you proceed to pay in the next step</em>.</small></p>
-        <div class="form-floating">
-            <input type="password" class="form-control" id="floatingPassword" placeholder="Password" name="password">
-            <label for="floatingPassword">Password</label>
-        </div>
-        <div class="form-floating">
-            <input type="password" class="form-control" id="floatingPassword" placeholder="Password" name="confirm_password">
-            <label for="floatingPassword">Confirm Password</label>
-        </div>
-        <p><small>The password must be <em>at least 5 characters long</em>.</small></p>
-        <div class="d-grid gap-2">
-            <button class="btn btn-lg btn-primary">SignUp</button>
-        </div>
-    </div>
-</form>
+    </form>
+</div>

@@ -1,19 +1,23 @@
-<form action="/users/signin" method="POST">
-    <legend>Log In</legend>
-    <div class="form-group">
-        <label class="form-label mt-4"></label>
-        <div class="form-floating mb-3">
-            <input type="email" class="form-control" id="floatingInput" placeholder="name@example.com" name="email">
-            <label for="floatingInput">Email address</label>
+<div class="login-container">
+    <form action="/users/signin" method="POST">
+        <legend class="signin-legend">Ingresa a tu cuenta</legend>
+        <div class="form-group">
+            <label class="form-label mt-4"></label>
+            <div class="form-floating mb-3">
+                <input type="email" class="form-control" id="floatingInput" placeholder="name@example.com" name="email">
+                <label for="floatingInput">Correo electrónico</label>
+            </div>
+            <div class="form-floating">
+                <input type="password" class="form-control" id="floatingPassword" placeholder="Password"
+                    name="password">
+                <label for="floatingPassword">Contraseña</label>
+            </div>
+            <p class="signin-small"><small>Olvidaste tu contraseña? </small> <a href="/forgotPassword">Haz click aquí</a></small></p>
+            <div class="d-grid gap-1">
+                <button class="btn btn-lg btn-primary btn-signin signlog">Ingresa</button>
+            </div>
+            <p class="signin-small"><small>Tienes una cuenta, pero no estás suscrito? <a href="/users/signin/subscription">Haz click aquí
+                    </a></small></p>
         </div>
-        <div class="form-floating">
-            <input type="password" class="form-control" id="floatingPassword" placeholder="Password" name="password">
-            <label for="floatingPassword">Password</label>
-        </div>
-        <p><small>Forgot Password? <a href="/forgotPassword">Click here</a></small></p>
-        <div class="d-grid gap-1">
-            <button class="btn btn-lg btn-primary" >Log In</button>
-        </div>
-        <p><small>Are you Signed Up, but don't have a subscription yet? <a href="/users/signin/subscription">click here</a></small></p>
-    </div>
-</form>
+    </form>
+</div>

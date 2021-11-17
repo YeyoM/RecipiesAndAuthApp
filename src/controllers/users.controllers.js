@@ -28,17 +28,17 @@ usersCtrl.renderSignUpForm = async (req, res) => {
 };
 usersCtrl.signUp = async (req, res) => {
     const errors = [];
-    const { name, email, password, confirm_password } = req.body;
+    const { name, email, password, confirm_password, phone, ocupation, species } = req.body;
     if (password != confirm_password) {
-        errors.push({ text: 'Passwords do not match' });
-    } if (password.length < 5) {
-        errors.push({ text: 'Password must be at least 5 characters long' });
+        errors.push({ text: 'Las contraseñas no coinciden' });
+    } if (password.length < 7) {
+        errors.push({ text: 'La contraseña debe de ser al menos 7 caracteres de longitud' });
     } if (errors.length > 0) {
         res.render('users/signup', { errors, name, email });
     } else {
         const emailUser = await User.findOne({ email: email });
         if (emailUser) {
-            req.flash('error_msg', 'Email already in use');
+            req.flash('error_msg', 'Este email ya está en uso');
             res.redirect('/users/signup');
         } else { 
             try {
@@ -48,7 +48,7 @@ usersCtrl.signUp = async (req, res) => {
                 });
                 stripeId = customer.id;
                 stripeInvoicePrefix = customer.invoice_prefix;
-                const newUser = new User({ name, email, password, stripeId, stripeInvoicePrefix });
+                const newUser = new User({name, email, password, stripeId, stripeInvoicePrefix, phone, ocupation, species });
                 newUser.password = await newUser.encryptPassword(password);
                 newUser.active = false;
                 await newUser.save();
@@ -63,13 +63,13 @@ usersCtrl.signUp = async (req, res) => {
                         transporter.sendMail({
                             to: newUser.email,
                             subject: 'Confirm Email',
-                            html: `Please click this link to confirm your email: <a href="${url}">${url}</a>`
+                            html: `Por favor, ingrese al link siguiente para verificar su correo: <a href="${url}">${url}</a>`
                         });
                     }
                 )
                 const user = await User.findOne({ email: email });
                 const idForSubscription = user.id;
-                req.flash('success_msg', 'You are now registered, please confirm your email and proceed with payment');
+                req.flash('success_msg', 'Ya estás registrado, continua con el pago para acceder a tu cuenta');
                 res.redirect(`/users/select-subscription/${idForSubscription}`);
             } catch (err) {
                 console.log(err);
@@ -89,7 +89,7 @@ usersCtrl.confirmPost = async (req, res) => {
         console.log(jwt.verify(token, process.env.TOKEN_SECRETO));
         await User.findByIdAndUpdate(user, { confirmed: true });
         await Confirm.findOneAndDelete({ user: user.id });
-        req.flash('success_msg', 'Now you can login with your new account');
+        req.flash('success_msg', 'Ahora puedes acceder a tu nueva cuenta');
         res.redirect("/users/signin");
     } catch (err) {
         console.log(err);
@@ -116,7 +116,7 @@ usersCtrl.signInForSubscription = async(req, res, next) => {
     try {
         const checkUser = await User.findOne({ email: req.body.email});
     if(checkUser.suscribed == true) {
-        req.flash('success_msg', 'You are already suscribed, just log in into your account');
+        req.flash('success_msg', 'Ya estás suscrito, solo ingresa a tu cuenta');
         res.redirect('/users/signin');
     }else {
         passport.authenticate('login-subs', function(err, user, info) {
@@ -144,7 +144,7 @@ usersCtrl.signInForSubscription = async(req, res, next) => {
 //Users logout
 usersCtrl.logOut = (req, res) => {
     req.logout();
-    req.flash('success_msg', 'Logged out successfully');
+    req.flash('success_msg', 'Haz salido de sesión correctamente');
     res.redirect('/users/signin');
 };
 
@@ -163,11 +163,11 @@ usersCtrl.updateName = async (req, res) => {
     const { name } = req.body;
     try {
         await User.findByIdAndUpdate(req.user.id, { name: name }).lean();
-        req.flash('success_msg', 'Name Updated Successfully');
+        req.flash('success_msg', 'Nombre actualizado correctamentey');
         res.redirect('/');
     } catch (err) {
         console.log(err);
-        req.flash('error_msg', 'Please fill in the form correctly');
+        req.flash('error_msg', 'Por favor, llene correctamente');
         res.redirect('/');
     };
 };
@@ -241,15 +241,15 @@ usersCtrl.createEmailCHangePassword = async (req, res) => {
                 transporter.sendMail({
                     to: email,
                     subject: 'Change Password',
-                    html: `Please click this link to change and set your new Password: <a href="${url}">${url}</a>`
+                    html: `Por favor ingrese en el siguiente link para cambiar la contraseña: <a href="${url}">${url}</a>`
                 });
             }
         )
-        req.flash('success_msg', 'Please check your Email inbox and click the link to change your password');
+        req.flash('success_msg', 'Ingresa a tu correo para cambiar tu contraseña');
         res.redirect('/');
     } catch (err) {
         console.log(err);
-        req.flash('error_msg', 'Oops, having trouble on that page, try again later');
+        req.flash('error_msg', 'Oops, algo salió mal, intenta nuevamente más tarde');
         res.redirect('/');
     }
     
@@ -260,9 +260,9 @@ usersCtrl.updatePassword = async (req, res) => {
         password, confirm_password
     } = req.body;
     if (password != confirm_password) {
-        errors.push({ text: 'Passwords do not match' });
-    } if (password.length < 5) {
-        errors.push({ text: 'Password must be at least 5 characters long' });
+        errors.push({ text: 'Las contraseñas no coinciden' });
+    } if (password.length < 7) {
+        errors.push({ text: 'La contraseña debe de ser al menos 7 caracteres de longitud' });
     } if (errors.length > 0) {
         res.render('users/signup', { errors });
     } else {
@@ -270,11 +270,11 @@ usersCtrl.updatePassword = async (req, res) => {
         newPassword.password = await newPassword.encryptPassword(password);
         try {
             await User.findByIdAndUpdate(req.user.id, { password: newPassword.password }).lean();
-            req.flash('success_msg', 'Password updated Successfully');
+            req.flash('success_msg', 'La contraseña se actualizó correctamente');
             res.redirect('/');
         } catch (err) {
             console.log(err);
-            req.flash('error_msg', 'Please fill in the form correctly');
+            req.flash('error_msg', 'Ingrese los datos correctamente');
             res.redirect('/');
         }
     }
@@ -311,12 +311,12 @@ usersCtrl.createCheckoutSession = async (req, res) => {
             success_url: 'https://animals-recipies-app.herokuapp.com/users/signin?session_id{CHECKOUT_SESSION_ID}', 
             cancel_url: 'https://animals-recipies-app.herokuapp.com/users/signin?session_id{CHECKOUT_SESSION_ID}',
         })
-        req.flash('success_msg', 'Payment recieved successfully, now just confirm email if you have not');
+        req.flash('success_msg', 'Pago recibido correctamente, solo verifique su correo si no lo ha hecho');
         console.log(session.url);
         return res.redirect(303, session.url);  
     } catch (e) {
         res.status(400);
-        req.flash('error_msg', 'Oops, having trouble on that page, try again later');
+        req.flash('error_msg', 'Oops, algo ha salido mal, intente nuevamente más tarde');
         return res.send({
             error: {
                 message: e.message,
@@ -406,15 +406,15 @@ usersCtrl.forgotPassword = async (req, res) => {
                 const url = `http://animals-recipies-app.herokuapp.com/changeForgotPassword/${emailToken}`;
                 transporter.sendMail({
                     to: email,
-                    subject: 'Change Password',
-                    html: `Please click this link to change and set your new Password: <a href="${url}">${url}</a>`
+                    subject: 'Cambio de contraseña',
+                    html: `Por favor ingrese en el siguiente link para actualizar su contraseña: <a href="${url}">${url}</a>`
                 })
             }
         )
-        req.flash('success_msg', 'Please check your Email inbox and click the link to set a new password');
+        req.flash('success_msg', 'Ingrese a su correo para actualizar si contraseña');
         res.render('users/signin');
     } catch (err) {
-        req.flash('error_msg', 'We could not find the email address, type a valid email address');
+        req.flash('error_msg', 'Oops! no encontramos su correo, ingrese nuevamente');
         res.render('users/signin');
     }
 }
@@ -444,9 +444,9 @@ usersCtrl.changeForgotPassword = async(req, res) => {
             } = req.body;
             console.log(password, confirm_password);
             if (password != confirm_password) {
-                errors.push({ text: 'Passwords do not match' });
-            } if (password.length < 5) {
-                errors.push({ text: 'Password must be at least 5 characters long' });
+                errors.push({ text: 'Las contraseñas no coinciden' });
+            } if (password.length < 7) {
+                errors.push({ text: 'La contraseña debe de ser al menos 7 caracteres de longitud' });
             } if (errors.length > 0) {
                 res.render('users/signup', { errors });
             } else {
@@ -455,17 +455,17 @@ usersCtrl.changeForgotPassword = async(req, res) => {
                 try {
                     await User.findByIdAndUpdate(id, { password: newPassword.password }).lean();
                     await User.findByIdAndUpdate(id, { forgotPassword: ""}).lean();
-                    req.flash('success_msg', 'Password Updated Succesfully');
+                    req.flash('success_msg', 'Contraseña actualizada correctamente');
                     res.redirect('/');
                 } catch (err) {
                     console.log(err);
-                    req.flash('error_msg', 'We found an error trying to change your password, please try again');
+                    req.flash('error_msg', 'Oops, nos enctontramos con un error al cambiar su contraseña, intente más tarde');
                     res.redirect('/');
                 }
             }
         });
     } catch (err) {
-        req.flash('error_msg', 'We found an error trying to change your password, please try again');
+        req.flash('error_msg', 'Oops, nos enctontramos con un error al cambiar su contraseña, intente más tard');
         res.redirect('/');
     }
     
@@ -480,7 +480,7 @@ usersCtrl.changeForgotPasswordForm = async(req, res) => {
             res.render('users/forgotPasswordForm', { token });
         });
     } catch (err) {
-        req.flash('error_msg', 'We found an error trying to change your password, please try again later');
+        req.flash('Oops, nos enctontramos con un error al cambiar su contraseña, intente más tard');
         res.redirect('/');
     }
 }

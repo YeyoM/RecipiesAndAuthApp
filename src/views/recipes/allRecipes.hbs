@@ -1,10 +1,10 @@
 <div>
-  <h1>All my Recipes</h1>
-  <p>Note: <small>To view the content of each Recipe tap on the recipe's name</small></p>
+  <h1>Todas mis dietas</h1>
+  <p>Nota: <small>para ingresar al contenido de cada dieta, solo pica en el nombre</small></p>
   <div>
     {{#each recipes}}
     <div class="card bg-secondary mb-3 " style="max-width: 18rem;">
-      <div class="card-header">Recipe</div>
+      <div class="card-header">Dieta</div>
       <div class="card-body">
         <h4 class="card-title">
           <a href="/recipe/{{_id}}">{{title}}</a>
@@ -26,7 +26,7 @@
     <div class="mb-5">
       <h4>Oops!</h4>
       <p class="lead">
-        We have not found any recipes, start adding them <a href="/recipes/add">here</a>.
+        No hemos encontrado ninguna dieta, añadélas <a href="/recipes/add">aquí</a>.
       </p>
     </div>
     {{/each }}

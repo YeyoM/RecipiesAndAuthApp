@@ -1,0 +1,58 @@
+<div class="animal-form">
+    <form action="/recipes/add/ganadolechero" method="POST">
+        <legend>Ingrese la información que se solicita</legend>
+        <div class="form-group">
+            <label for="exampleSelect1" class="form-label mt-2 white">Tipo de Animal</label>
+            <select class="form-select" id="exampleSelect1" name="tipoAnimal">
+                <option value="Pastoreo">Pastoreo</option>
+                <option value="Confinado">Confinado</option>
+            </select>
+        </div>
+        <div class="form-group">
+            <label for="exampleInputEmail1" class="form-label mt-2">Edad (en meses)</label>
+            <input type="number" name="edadMeses" class="form-control" id="exampleInputEmail1"
+                aria-describedby="emailHelp" placeholder="Edad" step="any" min="0">
+        </div>
+        <div class="form-group">
+            <label for="exampleInputEmail1" class="form-label mt-2">Peso (en kg)</label>
+            <input type="number" name="pesoVivo" class="form-control" id="exampleInputEmail1"
+                aria-describedby="emailHelp" placeholder="Peso" step="any" min="0">
+        </div>
+        <div class="form-group">
+            <label for="exampleInputEmail1" class="form-label mt-2">Producción de Leche (en litros)</label>
+            <input type="number" name="prodLeche" class="form-control" id="exampleInputEmail1"
+                aria-describedby="emailHelp" placeholder="Prod leche" step="any" min="0">
+        </div>
+        <div class="form-group">
+            <label for="exampleInputEmail1" class="form-label mt-2">Producción de Leche Objetivo (en litros)</label>
+            <input type="number" name="prodObjetivoLeche" class="form-control" id="exampleInputEmail1"
+                aria-describedby="emailHelp" placeholder="Prod objetivo" step="any" min="0">
+        </div>
+        <div class="form-group">
+            <label for="exampleInputEmail1" class="form-label mt-2">Distancia a la Ordeña (en mts)</label>
+            <input type="number" name="distOrde" class="form-control" id="exampleInputEmail1"
+                aria-describedby="emailHelp" placeholder="Distancia en metros" step="any" min="0">
+        </div>
+        <div class="form-group">
+            <label for="exampleSelect1" class="form-label mt-2 white">Lote Productivo (DEL)</label>
+            <select class="form-select" id="exampleSelect1" name="loteProd">
+                <option value="0 a 30">0 - 30 dias</option>
+                <option value="31 a 120">31 - 120 dias</option>
+                <option value="121 a 180">121 - 180 dias</option>
+                <option value="180 o mas">mas de 180 dias</option>
+            </select>
+        </div>
+        <div class="form-group">
+            <label for="exampleSelect1" class="form-label mt-2 white">No. de Lactancia</label>
+            <select class="form-select" id="exampleSelect1" name="noLactancia">
+                <option value="1">1</option>
+                <option value="2">2</option>
+                <option value="3">3</option>
+                <option value="mas 3">mas de 3</option>
+            </select>
+        </div>
+        <div class="d-grid gap-2">
+            <button class="btn btn-lg btn-primary signlog">Continuar!</button>
+        </div>
+    </form>
+</div>
