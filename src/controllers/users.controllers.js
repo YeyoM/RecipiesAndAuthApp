@@ -8,6 +8,9 @@ const stripe            = require('stripe')(process.env.STRIPE_SECRET_KEY);
 
 // config nodemailer rapidooooo
 const transporter = nodemailer.createTransport({
+    host: "smtp.gmail.com",
+    port: 456,
+    secure: true,
     service: 'Gmail',
     auth: {
         user: process.env.GMAIL_USER,
