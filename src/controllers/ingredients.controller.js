@@ -166,6 +166,7 @@ ingredientsCtrl.renderIngredients = async (req, res) => {
             arrs += 1;
         }
         console.log('hola4');
+        console.log(idReq, j);
         for (let j = 0; j < arrs; j ++) {
             if (idReq === j){
     console.log('hola5');
