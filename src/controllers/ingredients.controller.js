@@ -160,6 +160,7 @@ ingredientsCtrl.renderIngredients = async (req, res) => {
         const arrsLong = 50;
         var arrs = 0;
     console.log('hola3');
+        console.log(ingredients.length);
         for (let i = 0; i < ingredients.length; i += arrsLong) {
             let slice = ingredients.slice(i, i + arrsLong);
             separatedIngredients.push(slice);
