@@ -165,14 +165,18 @@ ingredientsCtrl.renderIngredients = async (req, res) => {
             separatedIngredients.push(slice);
             arrs += 1;
         }
+        console.log('hola4');
         for (let j = 0; j < arrs; j ++) {
             if (idReq === j){
+    console.log('hola5');
                 const ingredientspage = JSON.parse(JSON.stringify(separatedIngredients[j]));
+    console.log('hola6');
+
                 console.log(typeof ingredientspage);
                 // Check if is the firstPage
                 const prevPage = j;
                 const nextPage = j + 2;
-            console.log('hola4');
+            console.log('hola7');
 
                 if (idReq === 0) { 
                     res.render('ingredients/allIngredients', { 
