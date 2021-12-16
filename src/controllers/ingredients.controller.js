@@ -148,7 +148,9 @@ function isNum(val){
 }
 
 ingredientsCtrl.renderIngredients = async (req, res) => {
+    console.log('hola1');
     try {
+        console.log('hola2');
         if(isNum(req.params.id)){
             const publicingredients = await Ingredient.find({PUBLIC: true}).lean();
             const privateIngredients = await Ingredient.find({USER: req.user.id}).lean();
@@ -157,6 +159,7 @@ ingredientsCtrl.renderIngredients = async (req, res) => {
         const separatedIngredients = [];
         const arrsLong = 50;
         var arrs = 0;
+    console.log('hola3');
         for (let i = 0; i < ingredients.length; i += arrsLong) {
             let slice = ingredients.slice(i, i + arrsLong);
             separatedIngredients.push(slice);
@@ -169,6 +172,8 @@ ingredientsCtrl.renderIngredients = async (req, res) => {
                 // Check if is the firstPage
                 const prevPage = j;
                 const nextPage = j + 2;
+            console.log('hola4');
+
                 if (idReq === 0) { 
                     res.render('ingredients/allIngredients', { 
                         ingredientspage,
